@@ -1,4 +1,5 @@
 angular.module('fobu.home', [
+  'fobu.config',
   'ui.state',
   'directives.draggable',
   'directives.sortable'
@@ -16,7 +17,9 @@ angular.module('fobu.home', [
   });
 })
 
-.controller('HomeCtrl', function($scope) {
+.controller('HomeCtrl', function($scope, config) {
+  $scope.config = config;
+
   $scope.form = {
     text: 'Hello world 2!',
     elements: [{
@@ -51,48 +54,14 @@ angular.module('fobu.home', [
     }]
   };
 
-  $scope.types = [{
-    text: 'Text',
-    icon: 'glyphicon-bold',
-    type: 'text',
-    templateUrl: 'home/types/input.tpl.html'
-  }, {
-    text: 'Date',
-    icon: 'glyphicon-calendar',
-    type: 'date',
-    templateUrl: 'home/types/input.tpl.html'
-  }, {
-    text: 'Number',
-    icon: 'glyphicon-bold',
-    type: 'number',
-    templateUrl: 'home/types/input.tpl.html'
-  }, {
-    text: 'Dropdown',
-    icon: 'glyphicon-list',
-    type: 'select',
-    templateUrl: 'home/types/select.tpl.html'
-  }, {
-    text: 'Fieldset',
-    icon: 'glyphicon-credit-card',
-    type: 'fieldset',
-    templateUrl: 'home/types/fieldset.tpl.html'
-  }];
-
   // -- 8< -- TODO: Esto debe ser abstraído y mejorado --
-  var typeToIndex = {
-    text: 0,
-    date: 1,
-    number: 2,
-    select: 3,
-    fieldset: 4
-  };
   var fixForm = function(element) {
     if (! element.elements) { return; }
     for (var i = 0; i < element.elements.length; i++) {
       var el = element.elements[i];
       if (! el.type) { continue; }
-      var index = typeToIndex[el.type];
-      el.templateUrl = $scope.types[index].templateUrl;
+      var index = config.typeStringToIndex[el.type];
+      el.templateUrl = $scope.config.types[index].templateUrl;
       fixForm(el);
     }
   };

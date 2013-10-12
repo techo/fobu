@@ -1,34 +1,50 @@
 angular.module('fobu.config', [])
 
 .factory('config', function() {
-  return {
+  config = {
     types: [{
       text: 'Text',
       icon: 'glyphicon-bold',
       type: 'text',
-      templateUrl: 'editor/editor-form-element-input.tpl.html'
+      templateUrl: 'home/types/input.tpl.html'
     }, {
       text: 'Date',
       icon: 'glyphicon-calendar',
       type: 'date',
-      templateUrl: 'editor/editor-form-element-input.tpl.html'
+      templateUrl: 'home/types/input.tpl.html'
     }, {
       text: 'Number',
       icon: 'glyphicon-bold',
       type: 'number',
-      templateUrl: 'editor/editor-form-element-input.tpl.html'
+      templateUrl: 'home/types/input.tpl.html'
     }, {
       text: 'Dropdown',
       icon: 'glyphicon-list',
       type: 'select',
-      templateUrl: 'editor/editor-form-element-select.tpl.html'
+      templateUrl: 'home/types/select.tpl.html'
     }, {
       text: 'Fieldset',
       icon: 'glyphicon-credit-card',
       type: 'fieldset',
-      templateUrl: 'editor/editor-form-element-fieldset.tpl.html'
-    }]
+      templateUrl: 'home/types/fieldset.tpl.html'
+    }],
+
+    enabledTypes: [
+      'text', 'date', 'number', 'select', 'fieldset'
+    ]
   };
+
+  config.typeStringToIndex = {};
+  for (var i = 0; i < config.types.length; i++) {
+    config.typeStringToIndex[config.types[i].type] = i;
+  }
+
+  for (i = 0; i < config.enabledTypes.length; i++) {
+    var index = config.typeStringToIndex[config.enabledTypes[i]];
+    config.enabledTypes[i] = config.types[index];
+  }
+
+  return config;
 })
 
 ;
