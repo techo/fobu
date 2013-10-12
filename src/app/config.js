@@ -1,4 +1,4 @@
-angular.module('ngBoilerplate.editor-config', [])
+angular.module('fobu.config', [])
 
 .factory('config', function() {
   return {

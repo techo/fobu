@@ -1,38 +1,41 @@
-.jumbotron {
-  margin: 40px 0 80px 0;
-  text-align: center;
+.fe-sidepanel {
+  top: 20px;
+  width: 360px;
+}
 
-  h1 {
-    margin-bottom: 20px;
-    font-size: 55px;
-    line-height: 1;
+.fe-elements {
+  .panel-heading .btn-group {
+    position: relative;
+    top: -4px;
+
+    button {
+      padding-top: 3px;
+      padding-bottom: 3px;
+    }
   }
 
-  .lead {
-    font-size: 24px;
-    line-height: 1.25;
-  }
+  .panel-body button {
+    cursor: move;
 
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 
-.marketing {
-  .row {
-    margin-bottom: 10px;
+.fe-config {
+  label {
+    font-size: 13px;
   }
+  .input-sm {
+    padding: 5px;
+    height: 24px;
+  }
+  .checkbox {
+    margin-top: 0;
 
-  .row:last-child {
-    margin-bottom: 0;
-  }
-  
-  h4 [class*=" icon-"], h4 [class^="icon-"] {
-    margin-right: 5px;
-    vertical-align: -10%;
-    font-size: 28px;
-    line-height: 1;
+    label {
+      font-size: 12px;
+    }
   }
 }
-
