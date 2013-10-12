@@ -1,4 +1,5 @@
 angular.module('ngBoilerplate.editor', [
+  'ngBoilerplate.editor-config',
   'ui.state',
   'directives.draggable',
   'directives.sortable'
@@ -18,7 +19,9 @@ angular.module('ngBoilerplate.editor', [
   });
 })
 
-.controller('EditorCtrl', function EditorController($scope) {
+.controller('EditorCtrl', function EditorController($scope, config) {
+  console.log(config);
+
   $scope.form = {
     text: 'Hello world 2!',
     elements: [{
@@ -53,16 +56,56 @@ angular.module('ngBoilerplate.editor', [
     }]
   };
 
-  $scope.typeA = {
-    type: 'text'
-  };
+  $scope.types = [{
+    text: 'Text',
+    icon: 'glyphicon-bold',
+    type: 'text',
+    templateUrl: 'editor/editor-form-element-input.tpl.html'
+  }, {
+    text: 'Date',
+    icon: 'glyphicon-calendar',
+    type: 'date',
+    templateUrl: 'editor/editor-form-element-input.tpl.html'
+  }, {
+    text: 'Number',
+    icon: 'glyphicon-bold',
+    type: 'number',
+    templateUrl: 'editor/editor-form-element-input.tpl.html'
+  }, {
+    text: 'Dropdown',
+    icon: 'glyphicon-list',
+    type: 'select',
+    templateUrl: 'editor/editor-form-element-select.tpl.html'
+  }, {
+    text: 'Fieldset',
+    icon: 'glyphicon-credit-card',
+    type: 'fieldset',
+    templateUrl: 'editor/editor-form-element-fieldset.tpl.html'
+  }];
 
-  $scope.typeB = {
-    type: 'select'
+  // -- 8< -- TODO: Esto debe ser abstraído y mejorado --
+  var typeToIndex = {
+    text: 0,
+    date: 1,
+    number: 2,
+    select: 3,
+    fieldset: 4
   };
+  var fixForm = function(element) {
+    if (! element.elements) { return; }
+    for (var i = 0; i < element.elements.length; i++) {
+      var el = element.elements[i];
+      if (! el.type) { continue; }
+      var index = typeToIndex[el.type];
+      el.templateUrl = $scope.types[index].templateUrl;
+      fixForm(el);
+    }
+  };
+  fixForm($scope.form);
+  // -- 8< ----------------------------------------------
 
   $scope.$on('draggable.start', function(e, ui, ngModel) {
-    $scope.selectedType = ngModel.$modelValue.type;
+    $scope.selectedType = ngModel.$modelValue;
   });
 
   $scope.$on('draggable.stop', function(e, ui, ngModel) {
@@ -79,7 +122,8 @@ angular.module('ngBoilerplate.editor', [
         }
         ngModel.$modelValue[i] = {
           text: 'Pregunta sin título',
-          type: $scope.selectedType
+          type: $scope.selectedType.type,
+          templateUrl: $scope.selectedType.templateUrl
         };
       }
     });
@@ -106,7 +150,9 @@ angular.module('ngBoilerplate.editor', [
     scope: {
       ngModel: '='
     },
-    template: '<div ng-include="\'editor/editor-form-element-\' + ngModel.type + \'.tpl.html\'"></div>',
+    template: function(element, attrs) {
+      return '<div ng-include="ngModel.templateUrl"></div>';
+    },
     controller: function($scope, $element, $attrs) {
       $scope.select = function() {
         $scope.$emit('form.element.select');

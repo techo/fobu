@@ -23,47 +23,9 @@
 
             <div class="row">
               <div class="col-md-6">
-                <div style="font-size: 12px; cursor: move;" draggable connect-to=".foo" ng-model="typeA">
-                  <span class="glyphicon glyphicon-bold"></span> Texto
+                <div style="font-size: 12px; cursor: move;" ng-repeat="type in types" draggable connect-to=".foo" ng-model="type">
+                  <span class="glyphicon {{type.icon}}"></span> {{type.text}}
                 </div>
-              </div>
-              <div class="col-md-6">
-                <button type="button" class="btn btn-link btn-xs btn-block" style="text-align: left;">
-                  <span class="glyphicon glyphicon-text-height"></span> Área de texto
-                </button>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div style="font-size: 12px; cursor: move;" draggable connect-to=".foo" ng-model="typeB">
-                  <span class="glyphicon glyphicon-list"></span> Listado
-                </div>
-              </div>
-              <div class="col-md-6">
-                <button type="button" class="btn btn-link btn-xs btn-block" style="text-align: left;">
-                  <span class="glyphicon glyphicon-check"></span> Opción múltiple
-                </button>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <button type="button" class="btn btn-link btn-xs btn-block" style="text-align: left;">
-                  <span class="glyphicon glyphicon-record"></span> Opción única
-                </button>
-              </div>
-              <div class="col-md-6">
-                <button type="button" class="btn btn-link btn-xs btn-block" style="text-align: left;">
-                  <span class="glyphicon glyphicon-calendar"></span> Fecha
-                </button>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <button type="button" class="btn btn-link btn-xs btn-block" style="text-align: left;">
-                  <span class="glyphicon glyphicon-credit-card"></span> Módulo
-                </button>
-              </div>
-              <div class="col-md-6">
               </div>
             </div>
 
