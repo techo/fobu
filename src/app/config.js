@@ -27,10 +27,15 @@ angular.module('fobu.config', [])
       icon: 'glyphicon-credit-card',
       type: 'fieldset',
       templateUrl: 'home/types/fieldset.tpl.html'
+    }, {
+      text: 'Column break',
+      icon: 'glyphicon-share-alt',
+      type: 'column-break',
+      templateUrl: 'home/types/column-break.tpl.html'
     }],
 
     enabledTypes: [
-      'text', 'date', 'number', 'select', 'fieldset'
+      'text', 'date', 'number', 'select', 'fieldset', 'column-break'
     ]
   };
 

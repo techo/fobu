@@ -40,8 +40,19 @@ angular.module('fobu.home', [
           text: 'Option III'
         }]
       }, {
+        text: 'Pregunta B1',
+        type: 'date'
+      }, {
+        text: 'Pregunta B2',
+        type: 'date'
+      }, {
+        type: 'column-break'
+      }, {
         text: 'Pregunta C',
         type: 'date'
+      }, {
+        text: 'Pregunta D',
+        type: 'number'
       }]
     }, {
       text: 'Módulo #2',
@@ -76,20 +87,15 @@ angular.module('fobu.home', [
     $scope.selectedType = undefined;
   });
 
-  $scope.$on('sortable.update', function(e, ui, ngModel) {
+  $scope.$on('sortable.receiveDraggable', function(e, ui, ngModel, position) {
     ui.item.remove();
 
     e.targetScope.$apply(function() {
-      for (var i = 0; i < ngModel.$modelValue.length; i++) {
-        if (ngModel.$modelValue[i] !== undefined) {
-          continue;
-        }
-        ngModel.$modelValue[i] = {
-          text: 'Pregunta sin título',
-          type: $scope.selectedType.type,
-          templateUrl: $scope.selectedType.templateUrl
-        };
-      }
+      ngModel.$modelValue.splice(position, 0, {
+        text: 'Pregunta sin título',
+        type: $scope.selectedType.type,
+        templateUrl: $scope.selectedType.templateUrl
+      });
     });
   });
 
@@ -130,6 +136,25 @@ angular.module('fobu.home', [
     scope: {
       element: '=propertiesOf'
     }
+  };
+})
+
+.filter('inColumn', function() {
+  return function (elements, column) {
+    // Zero-index the column argument
+    --column;
+
+    var output = [];
+    for (var i = 0, currentColumn = 0; i < elements.length; i++) {
+      if (currentColumn == column) {
+        output.push(elements[i]);
+      }
+      if (elements[i].type == 'column-break') {
+        ++currentColumn;
+      }
+    }
+
+    return output;
   };
 })
 
