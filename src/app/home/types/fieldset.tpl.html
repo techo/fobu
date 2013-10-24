@@ -4,11 +4,14 @@
   </div>
   <div class="panel-body">
     <div class="row">
-      <div class="col-md-6 foo" sortable connect-to=".foo" ng-model="ngModel.elements">
+      <div class="col-md-4 foo" sortable connect-to=".foo" ng-model="ngModel.elements">
         <div form-element ng-repeat="element in ngModel.elements | inColumn:1" ng-model="element"></div>
       </div>
-      <div class="col-md-6 foo" sortable connect-to=".foo" ng-model="ngModel.elements" offset="{{(ngModel.elements | inColumn:1).length}}">
+      <div class="col-md-4 foo" sortable connect-to=".foo" ng-model="ngModel.elements" offset="{{(ngModel.elements | inColumn:2:'<').length}}">
         <div form-element ng-repeat="element in ngModel.elements | inColumn:2" ng-model="element"></div>
+      </div>
+      <div class="col-md-4 foo" sortable connect-to=".foo" ng-model="ngModel.elements" offset="{{(ngModel.elements | inColumn:3:'<').length}}">
+        <div form-element ng-repeat="element in ngModel.elements | inColumn:3" ng-model="element"></div>
       </div>
     </div>
   </div>

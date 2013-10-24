@@ -40,6 +40,8 @@ angular.module('fobu.home', [
           text: 'Option III'
         }]
       }, {
+        type: 'column-break'
+      }, {
         text: 'Pregunta B1',
         type: 'date'
       }, {
@@ -140,14 +142,16 @@ angular.module('fobu.home', [
 })
 
 .filter('inColumn', function() {
-  return function (elements, column) {
+  return function(elements, column, comparator) {
     // Zero-index the column argument
     --column;
 
     var output = [];
     for (var i = 0, currentColumn = 0; i < elements.length; i++) {
-      if (currentColumn == column) {
-        output.push(elements[i]);
+      switch (comparator || '=') {
+        case '=': if (currentColumn == column) { output.push(elements[i]); } break;
+        case '<': if (currentColumn <  column) { output.push(elements[i]); } break;
+        case '>': if (currentColumn >  column) { output.push(elements[i]); } break;
       }
       if (elements[i].type == 'column-break') {
         ++currentColumn;
