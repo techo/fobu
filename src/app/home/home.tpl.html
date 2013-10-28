@@ -23,8 +23,8 @@
 
             <div class="row">
               <div class="col-md-6">
-                <div style="font-size: 12px; cursor: move;" ng-repeat="type in config.enabledTypes" draggable connect-to=".foo" ng-model="type">
-                  <span class="glyphicon {{type.icon}}"></span> {{type.text}}
+                <div style="font-size: 13px; cursor: move;" ng-repeat="type in config.enabledTypes" draggable connect-to=".foo" ng-model="type">
+                  <span class="{{type.icon}}"></span> {{type.text}}
                 </div>
               </div>
             </div>

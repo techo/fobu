@@ -4,27 +4,27 @@ angular.module('fobu.config', [])
   config = {
     types: [{
       text: 'Text',
-      icon: 'glyphicon-bold',
       type: 'text',
+      icon: 'fa fa-font',
       templateUrl: 'home/types/input.tpl.html'
     }, {
       text: 'Date',
-      icon: 'glyphicon-calendar',
+      icon: 'fa fa-calendar',
       type: 'date',
       templateUrl: 'home/types/input.tpl.html'
     }, {
       text: 'Number',
-      icon: 'glyphicon-bold',
+      icon: 'fa fa-meh-o',
       type: 'number',
       templateUrl: 'home/types/input.tpl.html'
     }, {
       text: 'Dropdown',
-      icon: 'glyphicon-list',
+      icon: 'fa fa-list-alt',
       type: 'select',
       templateUrl: 'home/types/select.tpl.html'
     }, {
       text: 'Fieldset',
-      icon: 'glyphicon-credit-card',
+      icon: 'fa fa-columns',
       type: 'fieldset',
       templateUrl: 'home/types/fieldset.tpl.html',
       properties: [{
@@ -53,7 +53,7 @@ angular.module('fobu.config', [])
       }]
     }, {
       text: 'Column break',
-      icon: 'glyphicon-share-alt',
+      icon: 'fa fa-meh-o',
       type: 'column-break',
       templateUrl: 'home/types/column-break.tpl.html'
     }],
