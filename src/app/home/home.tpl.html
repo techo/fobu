@@ -60,21 +60,31 @@
             </div>
 
             <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Configuration</label>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" value="">
-                      Required
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
+              <div class="col-md-12">
+                <table class="table table-condensed">
+                  <thead>
+                    <tr>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="property in type.properties" ng-switch="property.type">
+                      <td>
+                        <label for="">{{property.text}}</label>
+                      </td>
+                      <td ng-switch-when="checkbox">
+                        <input type="checkbox" value="">
+                      </td>
+                      <td ng-switch-when="select">
+                        <select class="form-control input-sm" ng-model="element[property.name]" ng-options="e.value as e.text for e in property.elements"></select>
+                      </td>
+                      <td ng-switch-default></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
+            <!--
             <div class="row">
               <div class="col-md-12">
                 <table class="table table-condensed">
@@ -97,6 +107,7 @@
                 </table>
               </div>
             </div>
+            -->
 
           </div>
         </div>

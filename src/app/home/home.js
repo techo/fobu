@@ -55,6 +55,17 @@ angular.module('fobu.home', [
       }, {
         text: 'Pregunta D',
         type: 'number'
+      }, {
+        type: 'column-break'
+      }, {
+        text: 'Pregunta E',
+        type: 'number'
+      }, {
+        text: 'Pregunta F',
+        type: 'number'
+      }, {
+        text: 'Pregunta G',
+        type: 'number'
       }]
     }, {
       text: 'Módulo #2',
@@ -74,7 +85,14 @@ angular.module('fobu.home', [
       var el = element.elements[i];
       if (! el.type) { continue; }
       var index = config.typeStringToIndex[el.type];
-      el.templateUrl = $scope.config.types[index].templateUrl;
+      var type = $scope.config.types[index];
+      el.templateUrl = type.templateUrl;
+      if (type.properties) {
+        for (var j = 0; j < type.properties.length; j++) {
+          el[type.properties[j].name] = type.properties[j].value;
+        }
+        console.log(el);
+      }
       fixForm(el);
     }
   };
@@ -129,6 +147,12 @@ angular.module('fobu.home', [
       $scope.select = function() {
         $scope.$emit('form.element.select');
       };
+
+      // -- 8< -- TODO: Esto debe ser abstraído y mejorado --
+      $scope.range = function(n) {
+        return new Array(parseInt(n, 10));
+      };
+      // -- 8< ----------------------------------------------
     }
   };
 })
@@ -137,6 +161,12 @@ angular.module('fobu.home', [
   return {
     scope: {
       element: '=propertiesOf'
+    },
+    controller: function($scope, config) {
+      $scope.$watch('element.type', function(type) {
+        var index = config.typeStringToIndex[type];
+        $scope.type = config.types[index];
+      });
     }
   };
 })
