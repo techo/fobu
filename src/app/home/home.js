@@ -1,6 +1,7 @@
 angular.module('fobu.home', [
   'fobu.config',
   'ui.state',
+  'resources.form',
   'directives.draggable',
   'directives.sortable'
 ])
@@ -17,87 +18,12 @@ angular.module('fobu.home', [
   });
 })
 
-.controller('HomeCtrl', function($scope, config) {
+.controller('HomeCtrl', function($scope, config, Form) {
   $scope.config = config;
 
-  $scope.form = {
-    text: 'Hello world 2!',
-    elements: [{
-      text: 'Módulo #1',
-      type: 'fieldset',
-      elements: [{
-        text: 'Pregunta A',
-        type: 'text',
-        help: 'Texto de ayuda'
-      }, {
-        text: 'Pregunta B',
-        type: 'select',
-        elements: [{
-          text: 'Option I'
-        }, {
-          text: 'Option II'
-        }, {
-          text: 'Option III'
-        }]
-      }, {
-        type: 'column-break'
-      }, {
-        text: 'Pregunta B1',
-        type: 'date'
-      }, {
-        text: 'Pregunta B2',
-        type: 'date'
-      }, {
-        type: 'column-break'
-      }, {
-        text: 'Pregunta C',
-        type: 'date'
-      }, {
-        text: 'Pregunta D',
-        type: 'number'
-      }, {
-        type: 'column-break'
-      }, {
-        text: 'Pregunta E',
-        type: 'number'
-      }, {
-        text: 'Pregunta F',
-        type: 'number'
-      }, {
-        text: 'Pregunta G',
-        type: 'number'
-      }]
-    }, {
-      text: 'Módulo #2',
-      type: 'fieldset',
-      elements: []
-    }, {
-      text: 'Módulo #3',
-      type: 'fieldset',
-      elements: []
-    }]
-  };
-
-  // -- 8< -- TODO: Esto debe ser abstraído y mejorado --
-  var fixForm = function(element) {
-    if (! element.elements) { return; }
-    for (var i = 0; i < element.elements.length; i++) {
-      var el = element.elements[i];
-      if (! el.type) { continue; }
-      var index = config.typeStringToIndex[el.type];
-      var type = $scope.config.types[index];
-      el.templateUrl = type.templateUrl;
-      if (type.properties) {
-        for (var j = 0; j < type.properties.length; j++) {
-          el[type.properties[j].name] = type.properties[j].value;
-        }
-        console.log(el);
-      }
-      fixForm(el);
-    }
-  };
-  fixForm($scope.form);
-  // -- 8< ----------------------------------------------
+  $scope.form = Form.get({ formId: 1 }, function() {
+    setupElementDefaultConfigRecursively($scope.form, config);
+  });
 
   $scope.$on('draggable.start', function(e, ui, ngModel) {
     $scope.selectedType = ngModel.$modelValue;
@@ -111,17 +37,49 @@ angular.module('fobu.home', [
     ui.item.remove();
 
     e.targetScope.$apply(function() {
-      ngModel.$modelValue.splice(position, 0, {
+      var element = setupElementDefaultConfig({
         text: 'Pregunta sin título',
-        type: $scope.selectedType.type,
-        templateUrl: $scope.selectedType.templateUrl
-      });
+        type: $scope.selectedType.type
+      }, config);
+      ngModel.$modelValue.splice(position, 0, element);
     });
   });
 
   $scope.$on('form.element.select', function(e) {
     $scope.selection = e.targetScope.ngModel;
   });
+
+  function setupElementDefaultConfig(element, config) {
+    if (! element.type) {
+      return element;
+    }
+
+    var index = config.typeStringToIndex[element.type];
+    var type  = config.types[index];
+
+    element.templateUrl = type.templateUrl;
+    if (! type.properties) {
+      return element;
+    }
+    for (var i = 0; i < type.properties.length; i++) {
+      element[type.properties[i].name] = type.properties[i].value;
+    }
+
+    return element;
+  }
+
+  function setupElementDefaultConfigRecursively(element, config) {
+    setupElementDefaultConfig(element, config);
+
+    if (! element.elements) {
+      return element;
+    }
+    for (var i = 0; i < element.elements.length; i++) {
+      setupElementDefaultConfigRecursively(element.elements[i], config);
+    }
+
+    return element;
+  }
 })
 
 .directive('editableForm', function() {
