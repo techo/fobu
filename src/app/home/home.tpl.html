@@ -5,10 +5,10 @@
       <div class="fe-elements panel panel-default">
         <div class="panel-heading">
           <div class="btn-group pull-right">
-            <button type="button" class="btn btn-default btn-sm" disabled="disabled">
-              <span class="glyphicon glyphicon-save"></span> Guardar
+            <button type="button" class="btn btn-primary btn-sm" ng-click="save()">
+              <span class="glyphicon glyphicon-save"></span> Save
             </button>
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" disabled="disabled">
+            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
             </button>
           </div>
@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="panel panel-default" properties-of="selection">
+      <div class="fe-properties panel panel-default" properties-of="selection">
         <div class="panel-heading">
           <h4 class="panel-title">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
@@ -41,7 +41,7 @@
             </a>
           </h4>
         </div>
-        <div id="collapseTwo" class="fe-config panel-collapse collapse in">
+        <div id="collapseTwo" class="panel-collapse collapse in">
           <div class="panel-body">
 
             <div class="row">
@@ -81,6 +81,14 @@
                     </tr>
                   </tbody>
                 </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <button class="btn btn-danger btn-sm" ng-click="destroy()">
+                  <span class="glyphicon glyphicon-trash"></span> Delete
+                </button>
               </div>
             </div>
 

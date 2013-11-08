@@ -2,6 +2,7 @@ angular.module('fobu.home', [
   'fobu.config',
   'ui.state',
   'resources.form',
+  'services.elementTransformer',
   'directives.draggable',
   'directives.sortable'
 ])
@@ -18,12 +19,16 @@ angular.module('fobu.home', [
   });
 })
 
-.controller('HomeCtrl', function($scope, config, Form) {
+.controller('HomeCtrl', function($scope, Form, config, elementTransformer) {
   $scope.config = config;
 
   $scope.form = Form.get({ formId: 1 }, function() {
-    setupElementDefaultConfigRecursively($scope.form, config);
+    $scope.form = elementTransformer.transformRecursively($scope.form);
   });
+
+  $scope.save = function() {
+    $scope.form.$save();
+  };
 
   $scope.$on('draggable.start', function(e, ui, ngModel) {
     $scope.selectedType = ngModel.$modelValue;
@@ -37,49 +42,17 @@ angular.module('fobu.home', [
     ui.item.remove();
 
     e.targetScope.$apply(function() {
-      var element = setupElementDefaultConfig({
+      var element = elementTransformer.transform({
         text: 'Pregunta sin título',
         type: $scope.selectedType.type
-      }, config);
+      }, e.targetScope.ngModel);
       ngModel.$modelValue.splice(position, 0, element);
     });
   });
 
-  $scope.$on('form.element.select', function(e) {
+  $scope.$on('formElement.select', function(e) {
     $scope.selection = e.targetScope.ngModel;
   });
-
-  function setupElementDefaultConfig(element, config) {
-    if (! element.type) {
-      return element;
-    }
-
-    var index = config.typeStringToIndex[element.type];
-    var type  = config.types[index];
-
-    element.templateUrl = type.templateUrl;
-    if (! type.properties) {
-      return element;
-    }
-    for (var i = 0; i < type.properties.length; i++) {
-      element[type.properties[i].name] = type.properties[i].value;
-    }
-
-    return element;
-  }
-
-  function setupElementDefaultConfigRecursively(element, config) {
-    setupElementDefaultConfig(element, config);
-
-    if (! element.elements) {
-      return element;
-    }
-    for (var i = 0; i < element.elements.length; i++) {
-      setupElementDefaultConfigRecursively(element.elements[i], config);
-    }
-
-    return element;
-  }
 })
 
 .directive('editableForm', function() {
@@ -103,7 +76,7 @@ angular.module('fobu.home', [
     },
     controller: function($scope, $element, $attrs) {
       $scope.select = function() {
-        $scope.$emit('form.element.select');
+        $scope.$emit('formElement.select');
       };
 
       // -- 8< -- TODO: Esto debe ser abstraído y mejorado --
@@ -121,6 +94,11 @@ angular.module('fobu.home', [
       element: '=propertiesOf'
     },
     controller: function($scope, config) {
+      $scope.destroy = function() {
+        var index = $scope.element.parent.elements.indexOf($scope.element);
+        $scope.element.parent.elements.splice(index, 1);
+      };
+
       $scope.$watch('element.type', function(type) {
         var index = config.typeStringToIndex[type];
         $scope.type = config.types[index];

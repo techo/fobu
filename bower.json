@@ -4,7 +4,7 @@
   "devDependencies": {
     "angular": "~1.2.0",
     "angular-mocks": "~1.0.7",
-    "angular-resource": "~1.0.8",
+    "angular-resource": "~1.2.0",
     "bootstrap": "~3.0.0",
     "angular-bootstrap": "~0.3.0",
     "angular-ui-router": "~0.0.1",
