@@ -27,7 +27,9 @@ angular.module('fobu.home', [
   });
 
   $scope.save = function() {
-    $scope.form.$save();
+    $scope.form.$save(function() {
+      $scope.form = elementTransformer.transformRecursively($scope.form);
+    });
   };
 
   $scope.$on('draggable.start', function(e, ui, ngModel) {
