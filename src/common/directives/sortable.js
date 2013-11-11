@@ -46,6 +46,8 @@ angular.module('directives.sortable', [])
 
       if (attrs.connectTo) {
         $.extend(options, {
+          helper: 'clone',
+          appendTo: 'body',
           connectWith: attrs.connectTo
         });
       }
