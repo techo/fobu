@@ -1,3 +1,7 @@
+a {
+  cursor: pointer;
+}
+
 .fe-sidepanel {
   top: 20px;
   width: 360px;
@@ -47,6 +51,32 @@
 
     label {
       font-size: 12px;
+    }
+  }
+}
+
+.editable-form {
+  .stop-sorting {
+    display: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  &.sorting {
+    .stop-sorting {
+      display: inherit;
+    }
+
+    .panel-body {
+      display: none;
+    }
+
+    .ui-sortable-helper {
+      height: inherit !important;
+    }
+
+    .ui-sortable-placeholder {
+      height: 50px !important;
     }
   }
 }

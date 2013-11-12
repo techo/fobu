@@ -64,7 +64,12 @@ angular.module('fobu.home', [
     scope: {
       ngModel: '='
     },
-    templateUrl: 'home/types/form.tpl.html'
+    templateUrl: 'home/types/form.tpl.html',
+    controller: function($scope, $element, $attrs) {
+      $scope.stopSorting = function() {
+        $element.removeClass('sorting');
+      };
+    }
   };
 })
 
@@ -128,6 +133,18 @@ angular.module('fobu.home', [
     }
 
     return output;
+  };
+})
+
+.animation('.ui-sortable', function() {
+  return {
+    addClass: function(element, className, done) {
+      if (className === 'drag') {
+        element.parent().addClass('sorting');
+        element.sortable('refreshPositions');
+      }
+      done();
+    }
   };
 })
 

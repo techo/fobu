@@ -1,1 +1,7 @@
-<div form-element ng-repeat="element in ngModel.elements" ng-model="element"></div>
+<h2>{{ngModel.text}}</h2>
+<div class="alert alert-info text-center stop-sorting">
+  <a class="alert-link" ng-click="stopSorting()">I am done sorting</a>
+</div>
+<div sortable ng-model="ngModel.elements">
+  <div form-element ng-repeat="element in ngModel.elements" ng-model="element"></div>
+</div>
