@@ -1,16 +1,24 @@
 angular.module('directives.sortable', ['ngAnimate'])
 
-.directive('sortable', function() {
+.directive('sortable', function($animate) {
   return {
     require: '?ngModel',
     link: function(scope, element, attrs, ngModel) {
       var options = {
         start: function(e, ui) {
+          $animate.addClass(element, 'drag');
+
           var offset = parseInt(attrs.offset, 10) || 0;
 
           ui.item.sortable = { index: ui.item.index() + offset };
 
           scope.$emit('sortable.start', ui, ngModel);
+        },
+
+        stop: function(e, ui) {
+          $animate.removeClass(element, 'drag');
+
+          scope.$emit('sortable.stop', ui, ngModel);
         },
 
         update: function(e, ui) {
