@@ -4,7 +4,8 @@ angular.module('fobu.home', [
   'resources.form',
   'services.elementTransformer',
   'directives.draggable',
-  'directives.sortable'
+  'directives.sortable',
+  'ngAnimate'
 ])
 
 .config(function($stateProvider) {
