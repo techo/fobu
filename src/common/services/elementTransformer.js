@@ -1,8 +1,8 @@
-angular.module('services.elementTransformer', ['fobu.config'])
+angular.module('services.elementTransformer', [])
 
-.factory('elementTransformer', function(config) {
+.factory('elementTransformer', function() {
   return {
-    transform: function(element, parent) {
+    transform: function(element, config, parent) {
       element.parent = parent;
 
       if (! element.type) {
@@ -22,14 +22,14 @@ angular.module('services.elementTransformer', ['fobu.config'])
       return element;
     },
 
-    transformRecursively: function(element, parent) {
-      this.transform(element, parent);
+    transformRecursively: function(element, config, parent) {
+      this.transform(element, config, parent);
 
       if (! element.elements) {
         return element;
       }
       for (var i = 0; i < element.elements.length; i++) {
-        this.transformRecursively(element.elements[i], element);
+        this.transformRecursively(element.elements[i], config, element);
       }
 
       return element;

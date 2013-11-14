@@ -24,12 +24,12 @@ angular.module('fobu.home', [
   $scope.config = config;
 
   $scope.form = Form.get({ formId: 1 }, function() {
-    $scope.form = elementTransformer.transformRecursively($scope.form);
+    $scope.form = elementTransformer.transformRecursively($scope.form, config);
   });
 
   $scope.save = function() {
     $scope.form.$save(function() {
-      $scope.form = elementTransformer.transformRecursively($scope.form);
+      $scope.form = elementTransformer.transformRecursively($scope.form, config);
     });
   };
 
@@ -48,7 +48,7 @@ angular.module('fobu.home', [
       var element = elementTransformer.transform({
         text: 'Pregunta sin título',
         type: $scope.selectedType.type
-      }, e.targetScope.ngModel);
+      }, config, e.targetScope.ngModel);
       ngModel.$modelValue.splice(position, 0, element);
     });
   });

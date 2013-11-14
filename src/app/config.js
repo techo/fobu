@@ -1,6 +1,6 @@
-angular.module('fobu.config', [])
+angular.module('fobu.config', ['services.elementTransformer'])
 
-.factory('config', function() {
+.factory('config', function(elementTransformer) {
   config = {
     types: [{
       text: 'Checkboxes',
@@ -34,7 +34,24 @@ angular.module('fobu.config', [])
           { text: '2', value: 2 },
           { text: '3', value: 3 },
           { text: '4', value: 4 }
-        ]
+        ],
+        change: function(element) {
+          var i = -1;
+          var count = 0;
+          while (++i < element.elements.length) {
+            if (element.elements[i].type !== 'column-break') {
+              continue;
+            }
+            if (count++ >= (element.columns - 1)) {
+              element.elements.splice(i--, 1);
+            }
+          }
+          for (count; count < (element.columns - 1); count++) {
+            element.elements.push(elementTransformer.transform({
+              type: 'column-break'
+            }, config, element));
+          }
+        }
       }],
       initialize: function(element) {
         element.columns = element.columns || 2;
