@@ -59,7 +59,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row" ng-show="type.properties">
               <div class="col-md-12">
                 <table class="table table-condensed">
                   <thead>
@@ -84,6 +84,29 @@
               </div>
             </div>
 
+            <div class="row" ng-show="element.elements">
+              <div class="col-md-12">
+                <label>Options</label>
+              </div>
+            </div>
+            <div sortable ng-model="element.elements">
+              <div class="row" ng-repeat="element in element.elements" style="margin-bottom: 5px;">
+                <div class="col-md-12">
+                  <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" ng-model="element.text">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="addElement($index)">
+                        <span class="fa fa-plus"></span>
+                      </button>
+                      <button type="button" class="btn btn-default" ng-click="removeElement($index)">
+                        <span class="fa fa-minus"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-md-12 text-center">
                 <button class="btn btn-danger btn-sm" ng-click="destroy()">
@@ -91,31 +114,6 @@
                 </button>
               </div>
             </div>
-
-            <!--
-            <div class="row">
-              <div class="col-md-12">
-                <table class="table table-condensed">
-                  <thead>
-                    <tr>
-                      <th width="25%">Value</th>
-                      <th width="75%">Text</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="element in element.elements">
-                      <td>
-                        <input type="text" class="form-control input-sm">
-                      </td>
-                      <td>
-                        <input type="text" class="form-control input-sm" ng-model="element.text">
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            -->
 
           </div>
         </div>

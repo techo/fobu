@@ -107,6 +107,14 @@ angular.module('fobu.home', [
         $scope.element.parent.elements.splice(index, 1);
       };
 
+      $scope.addElement = function(index) {
+        $scope.element.elements.splice(index + 1, 0, { text: '' });
+      };
+
+      $scope.removeElement = function(index) {
+        $scope.element.elements.splice(index, 1);
+      };
+
       $scope.$watch('element.type', function(type) {
         var index = config.typeStringToIndex[type];
         $scope.type = config.types[index];

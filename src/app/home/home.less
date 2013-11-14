@@ -41,9 +41,29 @@ a {
     padding: 0 5px;
   }
 
-  .input-sm {
+  .input-sm,
+  .input-group-sm .form-control {
     padding: 5px;
     height: 24px;
+  }
+
+  .input-group-sm {
+    margin-left: -8px;
+    padding-left: 8px;
+
+    &:hover {
+      cursor: move;
+      background: url(img/grip.png) no-repeat;
+    }
+
+    .input-group-btn {
+      vertical-align: inherit;
+
+      .btn {
+        height: 24px;
+        padding: 3px 7px;
+      }
+    }
   }
 
   .checkbox {
