@@ -23,7 +23,7 @@ angular.module('fobu.home', [
 .controller('HomeCtrl', function($scope, Form, config, elementTransformer) {
   $scope.config = config;
 
-  $scope.form = Form.get({ formId: 58 }, function() {
+  $scope.form = Form.get({ formId: 1 }, function() {
     $scope.form = elementTransformer.transformRecursively($scope.form);
   });
 
