@@ -8,7 +8,7 @@ angular.module('fobu.config', [])
       type: 'checkbox',
       templateUrl: 'home/types/input-checkbox-radio.tpl.html',
       initialize: function(element) {
-        element.elements = element.elements || [{ text: '' }];
+        element.elements = element.elements || [{ text: 'Untitled option' }];
       }
     }, {
       text: 'Column break',
@@ -37,7 +37,7 @@ angular.module('fobu.config', [])
         ]
       }],
       initialize: function(element) {
-        element.columns = 2;
+        element.columns = element.columns || 2;
         element.columnClass = function() {
           switch (parseInt(this.columns, 10)) {
             case 2: return 'col-md-6';
@@ -59,7 +59,7 @@ angular.module('fobu.config', [])
       type: 'select',
       templateUrl: 'home/types/select.tpl.html',
       initialize: function(element) {
-        element.elements = element.elements || [{ text: '' }];
+        element.elements = element.elements || [{ text: 'Untitled option' }];
       }
     }, {
       text: 'Text',
@@ -77,7 +77,7 @@ angular.module('fobu.config', [])
       type: 'radio',
       templateUrl: 'home/types/input-checkbox-radio.tpl.html',
       initialize: function(element) {
-        element.elements = element.elements || [{ text: '' }];
+        element.elements = element.elements || [{ text: 'Untitled option' }];
       }
     }],
 
