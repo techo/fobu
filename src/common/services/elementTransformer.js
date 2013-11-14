@@ -14,12 +14,10 @@ angular.module('services.elementTransformer', ['fobu.config'])
 
       element.templateUrl = type.templateUrl;
 
-      if (! type.properties) {
+      if (! type.initialize) {
         return element;
       }
-      for (var i = 0; i < type.properties.length; i++) {
-        element[type.properties[i].name] = type.properties[i].value;
-      }
+      type.initialize(element);
 
       return element;
     },

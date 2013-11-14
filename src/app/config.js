@@ -6,7 +6,10 @@ angular.module('fobu.config', [])
       text: 'Checkboxes',
       icon: 'fa fa-check-square-o',
       type: 'checkbox',
-      templateUrl: 'home/types/input-checkbox-radio.tpl.html'
+      templateUrl: 'home/types/input-checkbox-radio.tpl.html',
+      initialize: function(element) {
+        element.elements = element.elements || [{ text: '' }];
+      }
     }, {
       text: 'Column break',
       icon: 'fa fa-meh-o',
@@ -26,17 +29,16 @@ angular.module('fobu.config', [])
         name: 'columns',
         text: 'Columns',
         type: 'select',
-        value: 2,
         elements: [
           { text: '1', value: 1 },
           { text: '2', value: 2 },
           { text: '3', value: 3 },
           { text: '4', value: 4 }
         ]
-      }, {
-        name: 'columnClass',
-        type: 'function',
-        value: function() {
+      }],
+      initialize: function(element) {
+        element.columns = 2;
+        element.columnClass = function() {
           switch (parseInt(this.columns, 10)) {
             case 2: return 'col-md-6';
             case 3: return 'col-md-4';
@@ -44,8 +46,8 @@ angular.module('fobu.config', [])
           }
 
           return 'col-md-12';
-        }
-      }]
+        };
+      }
     }, {
       text: 'Number',
       icon: 'fa fa-meh-o',
@@ -55,7 +57,10 @@ angular.module('fobu.config', [])
       text: 'Dropdown',
       icon: 'fa fa-list-alt',
       type: 'select',
-      templateUrl: 'home/types/select.tpl.html'
+      templateUrl: 'home/types/select.tpl.html',
+      initialize: function(element) {
+        element.elements = element.elements || [{ text: '' }];
+      }
     }, {
       text: 'Text',
       type: 'text',
@@ -70,7 +75,10 @@ angular.module('fobu.config', [])
       text: 'Multiple choice',
       icon: 'fa fa-dot-circle-o',
       type: 'radio',
-      templateUrl: 'home/types/input-checkbox-radio.tpl.html'
+      templateUrl: 'home/types/input-checkbox-radio.tpl.html',
+      initialize: function(element) {
+        element.elements = element.elements || [{ text: '' }];
+      }
     }],
 
     enabledTypes: [
