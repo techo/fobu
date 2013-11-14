@@ -102,7 +102,7 @@ angular.module('fobu.home', [
       element: '=propertiesOf'
     },
     controller: function($scope, config) {
-      $scope.destroy = function() {
+      $scope.remove = function() {
         var index = $scope.element.parent.elements.indexOf($scope.element);
         $scope.element.parent.elements.splice(index, 1);
       };
