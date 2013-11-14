@@ -3,25 +3,20 @@ angular.module('fobu.config', [])
 .factory('config', function() {
   config = {
     types: [{
-      text: 'Text',
-      type: 'text',
-      icon: 'fa fa-font',
-      templateUrl: 'home/types/input.tpl.html'
+      text: 'Checkboxes',
+      icon: 'fa fa-check-square-o',
+      type: 'checkbox',
+      templateUrl: 'home/types/input-checkbox-radio.tpl.html'
+    }, {
+      text: 'Column break',
+      icon: 'fa fa-meh-o',
+      type: 'column-break',
+      templateUrl: 'home/types/column-break.tpl.html'
     }, {
       text: 'Date',
       icon: 'fa fa-calendar',
       type: 'date',
       templateUrl: 'home/types/input.tpl.html'
-    }, {
-      text: 'Number',
-      icon: 'fa fa-meh-o',
-      type: 'number',
-      templateUrl: 'home/types/input.tpl.html'
-    }, {
-      text: 'Dropdown',
-      icon: 'fa fa-list-alt',
-      type: 'select',
-      templateUrl: 'home/types/select.tpl.html'
     }, {
       text: 'Fieldset',
       icon: 'fa fa-columns',
@@ -52,14 +47,34 @@ angular.module('fobu.config', [])
         }
       }]
     }, {
-      text: 'Column break',
+      text: 'Number',
       icon: 'fa fa-meh-o',
-      type: 'column-break',
-      templateUrl: 'home/types/column-break.tpl.html'
+      type: 'number',
+      templateUrl: 'home/types/input.tpl.html'
+    }, {
+      text: 'Dropdown',
+      icon: 'fa fa-list-alt',
+      type: 'select',
+      templateUrl: 'home/types/select.tpl.html'
+    }, {
+      text: 'Text',
+      type: 'text',
+      icon: 'fa fa-font',
+      templateUrl: 'home/types/input.tpl.html'
+    }, {
+      text: 'Paragraph text',
+      icon: 'fa fa-align-justify',
+      type: 'textarea',
+      templateUrl: 'home/types/textarea.tpl.html'
+    }, {
+      text: 'Multiple choice',
+      icon: 'fa fa-dot-circle-o',
+      type: 'radio',
+      templateUrl: 'home/types/input-checkbox-radio.tpl.html'
     }],
 
     enabledTypes: [
-      'text', 'date', 'number', 'select', 'fieldset', 'column-break'
+      'text', 'textarea', 'date', 'number', 'checkbox', 'radio', 'select', 'fieldset', 'column-break'
     ]
   };
 

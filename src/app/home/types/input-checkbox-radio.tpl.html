@@ -1,0 +1,8 @@
+<div class="form-group" ng-click="select()">
+  <label for="">{{ngModel.text}}</label>
+  <div class="{{ngModel.type}}" ng-repeat="element in ngModel.elements">
+    <label>
+      <input type="{{ngModel.type}}"> {{element.text}}
+    </label>
+  </div>
+</div>
