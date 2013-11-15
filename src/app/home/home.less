@@ -118,16 +118,21 @@ a {
 }
 
 .form-element-fieldset {
-  .row {
-    overflow: hidden;
+  .panel-body {
+    display: table;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
   }
 
-  /**
-   * This "hack" should expand each column to 100% height, that way an element
-   * can be dropped anywhere.
-   */
+  .row {
+    display: table-row;
+    height: 100%;
+  }
+
   .sortable-form-element {
-    margin-bottom: -999999px;
-    padding-bottom: 999999px;
+    display: table-cell;
+    float: none;
+    vertical-align: top;
   }
 }
