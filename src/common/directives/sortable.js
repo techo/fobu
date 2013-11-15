@@ -42,18 +42,17 @@ angular.module('directives.sortable', ['ngAnimate'])
             scope.$apply(function() {
               ngModel.$modelValue.splice(end, 0, ngModel.$modelValue.splice(start, 1)[0]);
             });
+
+            scope.$emit('sortable.receive', ui, ngModel, end);
           }
 
-          scope.$emit('sortable.update', ui, ngModel);
-        },
-
-        receive: function(e, ui) {
-          scope.$emit('sortable.receive', ui, ngModel);
+          scope.$emit('sortable.update', ui, ngModel, end);
         }
       };
 
       if (attrs.connectTo) {
         $.extend(options, {
+          items: '> *:not(.not-sortable)',
           helper: 'clone',
           appendTo: 'body',
           connectWith: attrs.connectTo

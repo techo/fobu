@@ -5,7 +5,7 @@
   <div class="panel-body">
     <div class="row">
       <div class="sortable-form-element" ng-class="ngModel.columnClass()" sortable connect-to=".sortable-form-element" ng-model="ngModel.elements" ng-repeat="i in range(ngModel.columns) track by $index" offset="{{(ngModel.elements | inColumn:$index+1:'<').length}}">
-        <div form-element ng-repeat="element in ngModel.elements | inColumn:$index+1" ng-model="element"></div>
+        <div form-element ng-repeat="element in ngModel.elements | inColumn:$index+1" ng-model="element" ng-class="{ 'not-sortable': ngModel.type === 'column-break' }"></div>
       </div>
     </div>
   </div>

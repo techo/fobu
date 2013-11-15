@@ -53,6 +53,23 @@ angular.module('fobu.home', [
     });
   });
 
+  $scope.$on('sortable.receive', function(e, ui, ngModel, position) {
+    e.targetScope.$apply(function() {
+      for (var i = 0, count = 0; i < ngModel.$modelValue.length; i++) {
+        if (ngModel.$modelValue[i].type !== 'column-break') {
+          continue;
+        }
+        if (count++ !== e.targetScope.$index) {
+          continue;
+        }
+        if (i === 0 || ngModel.$modelValue[i - 1].type === 'column-break') {
+          ngModel.$modelValue.splice(i, 0, ngModel.$modelValue.splice(position, 1)[0]);
+        }
+        break;
+      }
+    });
+  });
+
   $scope.$on('formElement.select', function(e) {
     $scope.selection = e.targetScope.ngModel;
   });
