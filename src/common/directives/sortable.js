@@ -5,6 +5,9 @@ angular.module('directives.sortable', ['ngAnimate'])
     require: '?ngModel',
     link: function(scope, element, attrs, ngModel) {
       var options = {
+        items: '> *:not(.not-sortable)',
+        handle: attrs.handle || false,
+
         start: function(e, ui) {
           $animate.addClass(element, 'drag');
 
@@ -52,7 +55,6 @@ angular.module('directives.sortable', ['ngAnimate'])
 
       if (attrs.connectTo) {
         $.extend(options, {
-          items: '> *:not(.not-sortable)',
           helper: 'clone',
           appendTo: 'body',
           connectWith: attrs.connectTo
