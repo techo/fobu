@@ -44,9 +44,24 @@ angular.module('fobu.home', [
   $scope.$on('sortable.receiveDraggable', function(e, ui, ngModel, position) {
     ui.item.remove();
 
+    // When an element is dropped on column A but after the column-break, we
+    // arrange this so it is inserted before the column-break.
+    for (var i = 0, count = 0; i < ngModel.$modelValue.length; i++) {
+      if (ngModel.$modelValue[i].type !== 'column-break') {
+        continue;
+      }
+      if (count++ !== e.targetScope.$index) {
+        continue;
+      }
+      if (position > i) {
+        position = i;
+      }
+      break;
+    }
+
     e.targetScope.$apply(function() {
       var element = elementTransformer.transform({
-        text: 'Pregunta sin título',
+        text: 'Untitled question',
         type: $scope.selectedType.type
       }, config, e.targetScope.ngModel);
       ngModel.$modelValue.splice(position, 0, element);
@@ -54,6 +69,7 @@ angular.module('fobu.home', [
   });
 
   $scope.$on('sortable.receive', function(e, ui, ngModel, position) {
+    // Fix to allow an element to be dropped on an empty column.
     e.targetScope.$apply(function() {
       for (var i = 0, count = 0; i < ngModel.$modelValue.length; i++) {
         if (ngModel.$modelValue[i].type !== 'column-break') {
