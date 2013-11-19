@@ -3,6 +3,7 @@ angular.module('fobu.home', [
   'ui.state',
   'resources.form',
   'services.elementTransformer',
+  'directives.formElementRenderer',
   'directives.draggable',
   'directives.sortable',
   'ngAnimate'
@@ -86,7 +87,7 @@ angular.module('fobu.home', [
     });
   });
 
-  $scope.$on('formElement.select', function(e) {
+  $scope.$on('element.select', function(e) {
     $scope.selection = e.targetScope.ngModel;
   });
 })
