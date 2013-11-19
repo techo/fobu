@@ -11,7 +11,7 @@ angular.module('directives.formElementRenderer', [])
     },
     controller: function($scope, $element, $attrs) {
       $scope.select = function() {
-        $scope.emit('formElementRenderer.select');
+        $scope.$emit('formElementRenderer.select');
       };
 
       $scope.range = function(n) {

@@ -66,6 +66,11 @@ angular.module('fobu.config', ['services.elementTransformer'])
         };
       }
     }, {
+      text: 'Form',
+      icon: 'fa fa-meh-o',
+      type: 'form',
+      templateUrl: 'home/types/form.tpl.html'
+    }, {
       text: 'Number',
       icon: 'fa fa-meh-o',
       type: 'number',
