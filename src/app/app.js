@@ -2,6 +2,7 @@ angular.module('fobu', [
   'templates-app',
   'templates-common',
   'fobu.home',
+  'fobu.view',
   'ui.state',
   'ui.route'
 ])
