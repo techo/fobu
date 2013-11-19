@@ -5,7 +5,7 @@ angular.module('directives.sortable', ['ngAnimate'])
     require: '?ngModel',
     link: function(scope, element, attrs, ngModel) {
       var options = {
-        items: '> *:not(.not-sortable)',
+        items: '> *:not(.sortable-not)',
         handle: attrs.handle || false,
 
         start: function(e, ui) {
