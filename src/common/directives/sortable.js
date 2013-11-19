@@ -9,7 +9,9 @@ angular.module('directives.sortable', ['ngAnimate'])
         handle: attrs.handle || false,
 
         start: function(e, ui) {
-          $animate.addClass(element, 'drag');
+          if (! ui.item.is('.ui-draggable')) {
+            $animate.addClass(element, 'drag');
+          }
 
           var offset = parseInt(attrs.offset, 10) || 0;
 
@@ -19,7 +21,9 @@ angular.module('directives.sortable', ['ngAnimate'])
         },
 
         stop: function(e, ui) {
-          $animate.removeClass(element, 'drag');
+          if (! ui.item.is('.ui-draggable')) {
+            $animate.removeClass(element, 'drag');
+          }
 
           scope.$emit('sortable.stop', ui, ngModel);
         },
