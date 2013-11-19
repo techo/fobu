@@ -21,6 +21,17 @@ angular.module('fobu.edit', [
   });
 })
 
+.directive('adaptHeight', function() {
+  return function(scope, element, attrs) {
+    scope.$watchCollection(attrs.adaptHeight, function() {
+      element.children().css('minHeight', 'inherit');
+      setTimeout(function() {
+        element.children().css('minHeight', element.height());
+      }, 0);
+    });
+  };
+})
+
 .controller('EditCtrl', function($scope, Form, config, elementTransformer) {
   $scope.config = config;
 
