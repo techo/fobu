@@ -154,7 +154,7 @@ angular.module('fobu.edit', [
 .animation('.ui-sortable', function() {
   return {
     addClass: function(element, className, done) {
-      if (className === 'drag') {
+      if (className === 'sort') {
         element.closest('.form-element').addClass('sorting');
         element.sortable('refreshPositions');
       }
