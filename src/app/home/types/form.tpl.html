@@ -1,7 +1,20 @@
 <h2>{{ngModel.text}}</h2>
-<div class="alert alert-info text-center stop-sorting">
-  <a class="alert-link" ng-click="stopSorting()">I am done sorting</a>
-</div>
-<div sortable handle=".sorting-handle" ng-model="ngModel.elements">
-  <div form-element ng-repeat="element in ngModel.elements" ng-model="element"></div>
+<div ng-switch="editable">
+
+  <!-- Editable -->
+  <div ng-switch-when="true">
+    <!-- TODO dejar el nombre stopSorting? -->
+    <div class="alert alert-info text-center stop-sorting">
+      <a class="alert-link" ng-click="stopSorting()">I am done sorting</a>
+    </div>
+    <div sortable handle=".sortable-handle" ng-model="ngModel.elements">
+      <div form-element-renderer editable ng-repeat="element in ngModel.elements" ng-model="element"></div>
+    </div>
+  </div>
+
+  <!-- Not editable -->
+  <div ng-switch-default>
+    <div form-element-renderer ng-repeat="element in ngModel.elements" ng-model="element"></div>
+  </div>
+
 </div>
