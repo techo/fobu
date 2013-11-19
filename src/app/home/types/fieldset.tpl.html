@@ -2,23 +2,21 @@
   <div class="panel-heading sortable-handle">
     <h4 class="panel-title" ng-click="select()">{{ngModel.text}}</h4>
   </div>
-  <div class="panel-body">
-    <div class="row" ng-switch="editable">
+  <div class="panel-body" ng-switch="editable">
 
-      <!-- Editable -->
-      <div ng-switch-when="true">
-        <div ng-class="ngModel.columnClass()" sortable connect-to=".form-element-fieldset .ui-sortable" ng-model="ngModel.elements" ng-repeat="i in range(ngModel.columns) track by $index" offset="{{(ngModel.elements | inColumn:$index+1:'<').length}}">
-          <div ng-class="{ 'sortable-not': ngModel.type === 'column-break' }" form-element-renderer editable ng-repeat="element in ngModel.elements | inColumn:$index+1" ng-model="element"></div>
-        </div>
+    <!-- Editable -->
+    <div class="row" ng-switch-when="true">
+      <div ng-class="ngModel.columnClass()" sortable connect-to=".form-element-fieldset .ui-sortable" ng-model="ngModel.elements" ng-repeat="i in range(ngModel.columns) track by $index" offset="{{(ngModel.elements | inColumn:$index+1:'<').length}}">
+        <div ng-class="{ 'sortable-not': ngModel.type === 'column-break' }" form-element-renderer editable ng-repeat="element in ngModel.elements | inColumn:$index+1" ng-model="element"></div>
       </div>
-
-      <!-- Not editable -->
-      <div ng-switch-default>
-        <div ng-class="ngModel.columnClass()" ng-repeat="i in range(ngModel.columns) track by $index">
-          <div form-element-renderer ng-repeat="element in ngModel.elements | inColumn:$index+1" ng-model="element"></div>
-        </div>
-      </div>
-
     </div>
+
+    <!-- Not editable -->
+    <div class="row" ng-switch-default>
+      <div ng-class="ngModel.columnClass()" ng-repeat="i in range(ngModel.columns) track by $index">
+        <div form-element-renderer ng-repeat="element in ngModel.elements | inColumn:$index+1" ng-model="element"></div>
+      </div>
+    </div>
+
   </div>
 </div>
