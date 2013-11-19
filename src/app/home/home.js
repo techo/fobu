@@ -106,29 +106,6 @@ angular.module('fobu.home', [
   };
 })
 
-.directive('formElement', function() {
-  return {
-    require: '?ngModel',
-    scope: {
-      ngModel: '='
-    },
-    template: function(element, attrs) {
-      return '<div ng-include="ngModel.templateUrl"></div>';
-    },
-    controller: function($scope, $element, $attrs) {
-      $scope.select = function() {
-        $scope.$emit('formElement.select');
-      };
-
-      // -- 8< -- TODO: Esto debe ser abstraído y mejorado --
-      $scope.range = function(n) {
-        return new Array(parseInt(n, 10));
-      };
-      // -- 8< ----------------------------------------------
-    }
-  };
-})
-
 .directive('propertiesOf', function() {
   return {
     scope: {
