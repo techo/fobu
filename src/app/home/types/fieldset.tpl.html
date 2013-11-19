@@ -7,8 +7,7 @@
 
       <!-- Editable -->
       <div ng-switch-when="true">
-        <!-- TODO acá quité .sortable-form-element; experimentemos con .ui-sortable -->
-        <div ng-class="ngModel.columnClass()" sortable connect-to=".ui-sortable" ng-model="ngModel.elements" ng-repeat="i in range(ngModel.columns) track by $index" offset="{{(ngModel.elements | inColumn:$index+1:'<').length}}">
+        <div ng-class="ngModel.columnClass()" sortable connect-to=".form-element-fieldset .ui-sortable" ng-model="ngModel.elements" ng-repeat="i in range(ngModel.columns) track by $index" offset="{{(ngModel.elements | inColumn:$index+1:'<').length}}">
           <div ng-class="{ 'sortable-not': ngModel.type === 'column-break' }" form-element-renderer editable ng-repeat="element in ngModel.elements | inColumn:$index+1" ng-model="element"></div>
         </div>
       </div>
