@@ -13,6 +13,7 @@ angular.module('services.elementTransformer', [])
       var type  = config.types[index];
 
       element.templateUrl = type.templateUrl;
+      element.controller  = type.controller;
 
       if (! type.initialize) {
         return element;

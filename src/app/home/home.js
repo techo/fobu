@@ -91,21 +91,6 @@ angular.module('fobu.home', [
   });
 })
 
-.directive('editableForm', function() {
-  return {
-    require: '?ngModel',
-    scope: {
-      ngModel: '='
-    },
-    templateUrl: 'home/types/form.tpl.html',
-    controller: function($scope, $element, $attrs) {
-      $scope.stopSorting = function() {
-        $element.removeClass('sorting');
-      };
-    }
-  };
-})
-
 .directive('propertiesOf', function() {
   return {
     scope: {
@@ -158,7 +143,7 @@ angular.module('fobu.home', [
   return {
     addClass: function(element, className, done) {
       if (className === 'drag') {
-        element.parent().addClass('sorting');
+        element.closest('.form-element-form').addClass('sorting');
         element.sortable('refreshPositions');
       }
       done();

@@ -69,7 +69,12 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Form',
       icon: 'fa fa-meh-o',
       type: 'form',
-      templateUrl: 'home/types/form.tpl.html'
+      templateUrl: 'home/types/form.tpl.html',
+      controller: function($scope, $element, $attrs) {
+        $scope.stopSorting = function() {
+          $element.find("> .sorting").removeClass('sorting');
+        };
+      }
     }, {
       text: 'Number',
       icon: 'fa fa-meh-o',

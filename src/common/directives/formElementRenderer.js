@@ -17,6 +17,12 @@ angular.module('directives.formElementRenderer', [])
       $scope.range = function(n) {
         return new Array(parseInt(n, 10));
       };
+
+      $scope.$watch('ngModel.controller', function(controller) {
+        if (controller) {
+          controller($scope, $element, $attrs);
+        }
+      });
     },
     link: function(scope, element, attrs) {
       scope.editable = 'editable' in attrs;
