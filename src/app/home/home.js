@@ -144,7 +144,7 @@ angular.module('fobu.home', [
   return {
     addClass: function(element, className, done) {
       if (className === 'drag') {
-        element.closest('.form-element-form').addClass('sorting');
+        element.closest('.form-element').addClass('sorting');
         element.sortable('refreshPositions');
       }
       done();

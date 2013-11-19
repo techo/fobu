@@ -7,7 +7,7 @@ angular.module('directives.formElementRenderer', [])
       ngModel: '='
     },
     template: function(element, attrs) {
-      return '<div class="form-element-{{ngModel.type}}" ng-include="ngModel.templateUrl"></div>';
+      return '<div class="form-element form-element-{{ngModel.type}}" ng-include="ngModel.templateUrl"></div>';
     },
     controller: function($scope, $element, $attrs) {
       $scope.select = function() {
