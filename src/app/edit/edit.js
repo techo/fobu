@@ -1,4 +1,4 @@
-angular.module('fobu.home', [
+angular.module('fobu.edit', [
   'fobu.config',
   'ui.state',
   'resources.form',
@@ -10,18 +10,18 @@ angular.module('fobu.home', [
 ])
 
 .config(function($stateProvider) {
-  $stateProvider.state('home', {
-    url: '/',
+  $stateProvider.state('edit', {
+    url: '/edit',
     views: {
       'main': {
-        controller: 'HomeCtrl',
-        templateUrl: 'home/home.tpl.html'
+        controller: 'EditCtrl',
+        templateUrl: 'edit/edit.tpl.html'
       }
     }
   });
 })
 
-.controller('HomeCtrl', function($scope, Form, config, elementTransformer) {
+.controller('EditCtrl', function($scope, Form, config, elementTransformer) {
   $scope.config = config;
 
   $scope.form = Form.get({ formId: 1 }, function() {

@@ -6,7 +6,7 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Checkboxes',
       icon: 'fa fa-check-square-o',
       type: 'checkbox',
-      templateUrl: 'home/types/input-checkbox-radio.tpl.html',
+      templateUrl: 'edit/types/input-checkbox-radio.tpl.html',
       initialize: function(element) {
         element.elements = element.elements || [{ text: 'Untitled option' }];
       }
@@ -14,17 +14,17 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Column break',
       icon: 'fa fa-meh-o',
       type: 'column-break',
-      templateUrl: 'home/types/column-break.tpl.html'
+      templateUrl: 'edit/types/column-break.tpl.html'
     }, {
       text: 'Date',
       icon: 'fa fa-calendar',
       type: 'date',
-      templateUrl: 'home/types/input.tpl.html'
+      templateUrl: 'edit/types/input.tpl.html'
     }, {
       text: 'Fieldset',
       icon: 'fa fa-columns',
       type: 'fieldset',
-      templateUrl: 'home/types/fieldset.tpl.html',
+      templateUrl: 'edit/types/fieldset.tpl.html',
       properties: [{
         name: 'columns',
         text: 'Columns',
@@ -69,7 +69,7 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Form',
       icon: 'fa fa-meh-o',
       type: 'form',
-      templateUrl: 'home/types/form.tpl.html',
+      templateUrl: 'edit/types/form.tpl.html',
       controller: function($scope, $element, $attrs) {
         $scope.stopSorting = function() {
           $element.find("> .sorting").removeClass('sorting');
@@ -79,12 +79,12 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Number',
       icon: 'fa fa-meh-o',
       type: 'number',
-      templateUrl: 'home/types/input.tpl.html'
+      templateUrl: 'edit/types/input.tpl.html'
     }, {
       text: 'Dropdown',
       icon: 'fa fa-list-alt',
       type: 'select',
-      templateUrl: 'home/types/select.tpl.html',
+      templateUrl: 'edit/types/select.tpl.html',
       initialize: function(element) {
         element.elements = element.elements || [{ text: 'Untitled option' }];
       }
@@ -92,17 +92,17 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Text',
       type: 'text',
       icon: 'fa fa-font',
-      templateUrl: 'home/types/input.tpl.html'
+      templateUrl: 'edit/types/input.tpl.html'
     }, {
       text: 'Paragraph text',
       icon: 'fa fa-align-justify',
       type: 'textarea',
-      templateUrl: 'home/types/textarea.tpl.html'
+      templateUrl: 'edit/types/textarea.tpl.html'
     }, {
       text: 'Multiple choice',
       icon: 'fa fa-dot-circle-o',
       type: 'radio',
-      templateUrl: 'home/types/input-checkbox-radio.tpl.html',
+      templateUrl: 'edit/types/input-checkbox-radio.tpl.html',
       initialize: function(element) {
         element.elements = element.elements || [{ text: 'Untitled option' }];
       }
