@@ -110,9 +110,45 @@ a {
     .ui-sortable-helper {
       height: inherit !important;
     }
+  }
+}
 
-    .ui-sortable-placeholder {
-      height: 50px !important;
-    }
+.ui-sortable-placeholder {
+  &:extend(.alert);
+  &:extend(.alert-warning);
+  visibility: inherit !important;
+  position: relative;
+  height: 75px;
+
+  &:before, &:after {
+    position: absolute;
+    left: 50%;
+    width: 200px;
+    margin-left: -100px;
+    text-align: center;
+  }
+
+  &:before {
+    /**
+     * FontAwesome snippet that HAD TO be copied and pasted because of this:
+     * https://github.com/less/less.js/issues/1485
+     */
+    content: "\f063";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    top: 50%;
+    margin-top: -25px;
+    font-size: 30px;
+  }
+
+  &:after {
+    content: 'Drop it here';
+    bottom: 50%;
+    margin-bottom: -25px;
   }
 }
