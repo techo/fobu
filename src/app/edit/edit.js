@@ -108,16 +108,16 @@ angular.module('fobu.edit', [
     scope: true,
     controller: function($scope, config) {
       $scope.remove = function() {
-        var index = $scope.element.parent.elements.indexOf($scope.element);
-        $scope.element.parent.elements.splice(index, 1);
+        var index = $scope.selection.parent.elements.indexOf($scope.selection);
+        $scope.selection.parent.elements.splice(index, 1);
       };
 
       $scope.addElement = function(index) {
-        $scope.element.elements.splice(index + 1, 0, { text: '' });
+        $scope.selection.elements.splice(index + 1, 0, { text: '' });
       };
 
       $scope.removeElement = function(index) {
-        $scope.element.elements.splice(index, 1);
+        $scope.selection.elements.splice(index, 1);
       };
 
       $scope.$watch('selection.type', function(type) {
