@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="fe-properties panel panel-default" properties-of="selection">
+      <div class="fe-properties panel panel-default" properties>
         <div class="panel-heading">
           <h4 class="panel-title">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
@@ -48,13 +48,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Texto</label>
-                  <input type="text" class="form-control input-sm" ng-model="element.text">
+                  <input type="text" class="form-control input-sm" ng-model="selection.text">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="">Ayuda</label>
-                  <input type="text" class="form-control input-sm" ng-model="element.help">
+                  <input type="text" class="form-control input-sm" ng-model="selection.help">
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
                         <input type="checkbox" value="">
                       </td>
                       <td ng-switch-when="select">
-                        <select class="form-control input-sm" ng-model="element[property.name]" ng-options="e.value as e.text for e in property.elements" ng-change='property.change(element)'></select>
+                        <select class="form-control input-sm" ng-model="selection[property.name]" ng-options="e.value as e.text for e in property.elements" ng-change='property.change(selection)'></select>
                       </td>
                       <td ng-switch-default></td>
                     </tr>
@@ -80,14 +80,14 @@
               </div>
             </div>
 
-            <div class="fe-options" ng-show="element.elements">
+            <div class="fe-options" ng-show="selection.elements">
               <div class="row">
                 <div class="col-md-12">
                   <label>Options</label>
                 </div>
               </div>
-              <div sortable ng-model="element.elements">
-                <div class="row" ng-repeat="element in element.elements">
+              <div sortable ng-model="selection.elements">
+                <div class="row" ng-repeat="element in selection.elements">
                   <div class="col-md-12">
                     <div class="input-group input-group-sm">
                       <input type="text" class="form-control" ng-model="element.text">

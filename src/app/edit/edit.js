@@ -103,11 +103,9 @@ angular.module('fobu.edit', [
   });
 })
 
-.directive('propertiesOf', function() {
+.directive('properties', function() {
   return {
-    scope: {
-      element: '=propertiesOf'
-    },
+    scope: true,
     controller: function($scope, config) {
       $scope.remove = function() {
         var index = $scope.element.parent.elements.indexOf($scope.element);
@@ -122,7 +120,7 @@ angular.module('fobu.edit', [
         $scope.element.elements.splice(index, 1);
       };
 
-      $scope.$watch('element.type', function(type) {
+      $scope.$watch('selection.type', function(type) {
         var index = config.typeStringToIndex[type];
         $scope.type = config.types[index];
       });
