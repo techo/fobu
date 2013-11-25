@@ -77,6 +77,8 @@ angular.module('fobu.edit', [
         type: $scope.selectedType.type
       }, config, e.targetScope.ngModel);
       ngModel.$modelValue.splice(position, 0, element);
+
+      select(element);
     });
   });
 
@@ -99,13 +101,17 @@ angular.module('fobu.edit', [
   });
 
   $scope.$on('element.select', function(e) {
+    select(e.targetScope.ngModel);
+  });
+
+  function select(element) {
     if ($scope.selection) {
       $scope.selection.classes.splice($scope.selection.classes.indexOf('selected'), 1);
     }
 
-    $scope.selection = e.targetScope.ngModel;
+    $scope.selection = element;
     $scope.selection.classes.push('selected');
-  });
+  }
 })
 
 .directive('properties', function() {
