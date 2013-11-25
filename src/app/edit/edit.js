@@ -99,7 +99,12 @@ angular.module('fobu.edit', [
   });
 
   $scope.$on('element.select', function(e) {
+    if ($scope.selection) {
+      $scope.selection.classes.splice($scope.selection.classes.indexOf('selected'), 1);
+    }
+
     $scope.selection = e.targetScope.ngModel;
+    $scope.selection.classes.push('selected');
   });
 })
 

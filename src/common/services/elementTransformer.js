@@ -12,6 +12,7 @@ angular.module('services.elementTransformer', [])
       var index = config.typeStringToIndex[element.type];
       var type  = config.types[index];
 
+      element.classes     = type.classes ? type.classes.split(' ') : [];
       element.templateUrl = type.templateUrl;
       element.controller  = type.controller;
 

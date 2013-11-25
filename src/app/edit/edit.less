@@ -91,6 +91,14 @@ a {
   }
 }
 
+.form-element {
+  cursor: pointer;
+
+  input {
+    cursor: pointer;
+  }
+}
+
 .form-element-form {
   .stop-sorting {
     display: none;
@@ -111,9 +119,7 @@ a {
       height: inherit !important;
     }
   }
-}
 
-.form-element-form {
   .ui-sortable-placeholder {
     &:extend(.alert);
     &:extend(.alert-warning);
@@ -152,5 +158,18 @@ a {
       bottom: 50%;
       margin-bottom: -25px;
     }
+  }
+}
+
+.form-element-fieldset {
+  &.selected .panel {
+    .panel-variant(@panel-info-border; @panel-info-text; @panel-info-heading-bg; @panel-info-border);
+  }
+
+  .selected {
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+    padding: 5px 10px 0 10px;
+    margin: -6px -11px -1px -11px;
   }
 }
