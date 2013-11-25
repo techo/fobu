@@ -37,23 +37,11 @@ angular.module('fobu.edit', [
 
   $scope.form = Form.get({ formId: 1 }, function() {
     $scope.form = elementTransformer.transformRecursively($scope.form, config);
-
-    // When .$watch'ing the form, it was triggered one more time than we
-    // expected, so we're using this state (dirty = undefined) to keep track of
-    // it.
-    $scope.dirty = undefined;
   });
-
-  $scope.$watch('form', function(newValue, oldValue) {
-    if (newValue && newValue !== oldValue) {
-      $scope.dirty = ($scope.dirty === undefined ? false : true);
-    }
-  }, true);
 
   $scope.save = function() {
     $scope.form.$save(function() {
       $scope.form  = elementTransformer.transformRecursively($scope.form, config);
-      $scope.dirty = undefined;
     });
   };
 
