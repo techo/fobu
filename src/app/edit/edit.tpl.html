@@ -67,7 +67,7 @@
             </div>
           </div>
 
-          <div class="fe-options" ng-show="selection.elements">
+          <div class="fe-options" ng-show="selection.elements && selection.type !== 'fieldset' && selection.type !== 'form'">
             <div class="row">
               <div class="col-md-12">
                 <label>Options</label>
