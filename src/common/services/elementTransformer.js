@@ -3,7 +3,12 @@ angular.module('services.elementTransformer', [])
 .factory('elementTransformer', function() {
   return {
     transform: function(element, config, parent) {
-      element.parent = parent;
+      // To avoid $watch() and other AngularJS functions to fail because of the
+      // circular dependency created between parent<->child, we define parent
+      // as a function.
+      element.parent = function() {
+        return parent;
+      };
 
       if (! element.type) {
         return element;
@@ -38,8 +43,6 @@ angular.module('services.elementTransformer', [])
     },
 
     reverseTransform: function(element) {
-      delete element.parent;
-
       return element;
     },
 

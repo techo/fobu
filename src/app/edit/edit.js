@@ -119,8 +119,8 @@ angular.module('fobu.edit', [
     scope: true,
     controller: function($scope, config) {
       $scope.remove = function() {
-        var index = $scope.selection.parent.elements.indexOf($scope.selection);
-        $scope.selection.parent.elements.splice(index, 1);
+        var index = $scope.selection.parent().elements.indexOf($scope.selection);
+        $scope.selection.parent().elements.splice(index, 1);
       };
 
       $scope.addElement = function(index) {
