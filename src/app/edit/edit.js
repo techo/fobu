@@ -6,6 +6,7 @@ angular.module('fobu.edit', [
   'directives.formElementRenderer',
   'directives.draggable',
   'directives.sortable',
+  'directives.tab',
   'ngAnimate'
 ])
 

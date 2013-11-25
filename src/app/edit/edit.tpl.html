@@ -1,124 +1,106 @@
 <div class="row">
   <div class="col-md-4">
-    <div class="fe-sidepanel panel-group affix" id="accordion">
-
-      <div class="fe-elements panel panel-default">
-        <div class="panel-heading">
-          <div class="btn-group pull-right">
-            <button type="button" class="btn btn-primary btn-sm" ng-click="save()">
-              <span class="glyphicon glyphicon-save"></span> Save
-            </button>
-            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-              <span class="caret"></span>
-            </button>
-          </div>
-          <h4 class="panel-title">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-              &nbsp;
-            </a>
-          </h4>
-        </div>
-        <div id="collapseOne" class="panel-collapse collapse in">
-          <div class="panel-body">
-
-            <div class="row">
-              <div class="col-md-6">
-                <div style="font-size: 13px; cursor: move;" ng-repeat="type in config.enabledTypes" draggable connect-to=".form-element .ui-sortable" ng-model="type">
-                  <span class="{{type.icon}}"></span> {{type.text}}
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
+    <div class="fe-sidepanel affix">
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-primary btn-sm" ng-click="save()">
+          <span class="glyphicon glyphicon-save"></span> Save
+        </button>
+        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+        </button>
       </div>
-
-      <div class="fe-properties panel panel-default" properties>
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-              Properties
-            </a>
-          </h4>
+      <ul class="nav nav-tabs">
+        <li>
+          <a tab data-target="#elements">Elements</a>
+        </li>
+        <li class="active">
+          <a tab data-target="#properties">Properties</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane" id="elements">
+          <div class="row">
+            <div class="col-md-6">
+              <div style="font-size: 13px; cursor: move;" ng-repeat="type in config.enabledTypes" draggable connect-to=".form-element .ui-sortable" ng-model="type">
+                <span class="{{type.icon}}"></span> {{type.text}}
+              </div>
+            </div>
+          </div>
         </div>
-        <div id="collapseTwo" class="panel-collapse collapse in">
-          <div class="panel-body">
 
+        <div class="fe-properties tab-pane active" id="properties" properties>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="">Text</label>
+                <textarea class="form-control input-sm" rows="2" ng-model="selection.text"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="">Help</label>
+                <input type="text" class="form-control input-sm" ng-model="selection.help">
+              </div>
+            </div>
+          </div>
+
+          <div class="row" ng-show="type.properties">
+            <div class="col-md-12">
+              <table class="table table-condensed">
+                <tbody>
+                  <tr ng-repeat="property in type.properties" ng-switch="property.type">
+                    <td>
+                      <label for="">{{property.text}}</label>
+                    </td>
+                    <td ng-switch-when="checkbox">
+                      <input type="checkbox" value="">
+                    </td>
+                    <td ng-switch-when="select">
+                      <select class="form-control input-sm" ng-model="selection[property.name]" ng-options="e.value as e.text for e in property.elements" ng-change='property.change(selection)'></select>
+                    </td>
+                    <td ng-switch-default></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="fe-options" ng-show="selection.elements">
             <div class="row">
               <div class="col-md-12">
-                <div class="form-group">
-                  <label for="">Text</label>
-                  <textarea class="form-control input-sm" rows="2" ng-model="selection.text"></textarea>
-                </div>
+                <label>Options</label>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="">Help</label>
-                  <input type="text" class="form-control input-sm" ng-model="selection.help">
-                </div>
-              </div>
-            </div>
-
-            <div class="row" ng-show="type.properties">
-              <div class="col-md-12">
-                <table class="table table-condensed">
-                  <tbody>
-                    <tr ng-repeat="property in type.properties" ng-switch="property.type">
-                      <td>
-                        <label for="">{{property.text}}</label>
-                      </td>
-                      <td ng-switch-when="checkbox">
-                        <input type="checkbox" value="">
-                      </td>
-                      <td ng-switch-when="select">
-                        <select class="form-control input-sm" ng-model="selection[property.name]" ng-options="e.value as e.text for e in property.elements" ng-change='property.change(selection)'></select>
-                      </td>
-                      <td ng-switch-default></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="fe-options" ng-show="selection.elements">
-              <div class="row">
+            <div sortable ng-model="selection.elements">
+              <div class="row" ng-repeat="element in selection.elements">
                 <div class="col-md-12">
-                  <label>Options</label>
-                </div>
-              </div>
-              <div sortable ng-model="selection.elements">
-                <div class="row" ng-repeat="element in selection.elements">
-                  <div class="col-md-12">
-                    <div class="input-group input-group-sm">
-                      <input type="text" class="form-control" ng-model="element.text">
-                      <div class="input-group-btn">
-                        <button type="button" class="btn btn-default" tabindex="-1" ng-click="addElement($index)">
-                          <span class="fa fa-plus"></span>
-                        </button>
-                        <button type="button" class="btn btn-default" tabindex="-1" ng-click="removeElement($index)">
-                          <span class="fa fa-minus"></span>
-                        </button>
-                      </div>
+                  <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" ng-model="element.text">
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-default" tabindex="-1" ng-click="addElement($index)">
+                        <span class="fa fa-plus"></span>
+                      </button>
+                      <button type="button" class="btn btn-default" tabindex="-1" ng-click="removeElement($index)">
+                        <span class="fa fa-minus"></span>
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="row">
-              <div class="col-md-12 text-center">
-                <button class="btn btn-danger btn-sm" ng-click="remove()">
-                  <span class="glyphicon glyphicon-trash"></span> Delete
-                </button>
-              </div>
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <button class="btn btn-danger btn-sm" ng-click="remove()">
+                <span class="glyphicon glyphicon-trash"></span> Delete
+              </button>
             </div>
-
           </div>
         </div>
       </div>
-
     </div>
   </div>
   <div class="col-md-8">
