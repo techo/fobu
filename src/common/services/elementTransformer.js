@@ -18,8 +18,8 @@ angular.module('services.elementTransformer', [])
       var type  = config.types[index];
 
       element.classes     = type.classes ? type.classes.split(' ') : [];
-      element.templateUrl = type.templateUrl;
-      element.controller  = type.controller;
+      element.templateUrl = element.templateUrl || type.templateUrl;
+      element.controller  = element.controller || type.controller;
 
       if (! type.initialize) {
         return element;
