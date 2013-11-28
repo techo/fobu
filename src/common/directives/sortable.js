@@ -17,7 +17,10 @@ angular.module('directives.sortable', ['ngAnimate'])
 
           var offset = parseInt(attrs.offset, 10) || 0;
 
-          ui.item.sortable = { index: ui.item.index() + offset };
+          ui.item.directive = {
+            start: ui.item.index() + offset,
+            startModel: ngModel
+          };
 
           scope.$emit('sortable.start', ui, ngModel);
         },
@@ -35,7 +38,7 @@ angular.module('directives.sortable', ['ngAnimate'])
         update: function(e, ui) {
           var offset = parseInt(attrs.offset, 10) || 0;
 
-          var start = ui.item.sortable.index;
+          var start = ui.item.directive.start;
           var end   = ui.item.index() + offset;
 
           // Adjustments must be made when the item is moved across sortables.
@@ -51,7 +54,8 @@ angular.module('directives.sortable', ['ngAnimate'])
           // sortable will take care of adding it back.
           } else if (ui.item.closest('.ui-sortable')[0] === element[0]) {
             scope.$apply(function() {
-              ngModel.$modelValue.splice(end, 0, ngModel.$modelValue.splice(start, 1)[0]);
+              var element = ui.item.directive.startModel.$modelValue.splice(start, 1)[0];
+              ngModel.$modelValue.splice(end, 0, element);
             });
 
             scope.$emit('sortable.receive', ui, ngModel, end);
