@@ -55,6 +55,19 @@ angular.module('fobu.config', ['services.elementTransformer'])
             }, config, element));
           }
         }
+      }, {
+        name: 'template',
+        text: 'Template',
+        type: 'select',
+        elements: [
+          { text: 'Default', value: 'default' },
+          { text: 'Horizontal', value: 'horizontal' }
+        ],
+        change: function(element) {
+          var index = config.typeStringToIndex['fieldset'];
+          var type  = config.types[index];
+          element.templateUrl = type.templateUrl[element.template];
+        }
       }],
       initialize: function(element) {
         element.columns = element.columns || 2;
@@ -67,6 +80,7 @@ angular.module('fobu.config', ['services.elementTransformer'])
 
           return 'col-md-12';
         };
+        element.template = element.template || 'default';
       }
     }, {
       text: 'Form',
