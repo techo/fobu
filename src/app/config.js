@@ -19,7 +19,10 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Date',
       icon: 'fa fa-calendar',
       type: 'date',
-      templateUrl: 'templates/types/input.tpl.html'
+      templateUrl: {
+        'default': 'templates/types/input.tpl.html',
+        'horizontal': 'templates/types/fieldset/horizontal_input.tpl.html'
+      }
     }, {
       text: 'Fieldset',
       icon: 'fa fa-columns',
@@ -69,6 +72,23 @@ angular.module('fobu.config', ['services.elementTransformer'])
           element.templateUrl = type.templateUrl[element.template];
         }
       }],
+      controller: function($scope, $element, $attrs) {
+        $scope.$watch('ngModel.templateUrl', function() {
+          return updateElementsTemplate($scope.ngModel.elements);
+        });
+
+        $scope.$watchCollection('ngModel.elements', updateElementsTemplate);
+
+        function updateElementsTemplate(elements) {
+          for (var i = 0; i < elements.length; i++) {
+            var index = config.typeStringToIndex[elements[i].type];
+            var type  = config.types[index];
+            if (typeof type.templateUrl === 'object') {
+              elements[i].templateUrl = type.templateUrl[$scope.ngModel.template];
+            }
+          }
+        }
+      },
       initialize: function(element) {
         element.columns = element.columns || 2;
         element.columnClass = function() {
@@ -96,12 +116,18 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Number',
       icon: 'fa fa-meh-o',
       type: 'number',
-      templateUrl: 'templates/types/input.tpl.html'
+      templateUrl: {
+        'default': 'templates/types/input.tpl.html',
+        'horizontal': 'templates/types/fieldset/horizontal_input.tpl.html'
+      }
     }, {
       text: 'Dropdown',
       icon: 'fa fa-list-alt',
       type: 'select',
-      templateUrl: 'templates/types/select.tpl.html',
+      templateUrl: {
+        'default': 'templates/types/select.tpl.html',
+        'horizontal': 'templates/types/fieldset/horizontal_select.tpl.html'
+      },
       initialize: function(element) {
         element.elements = element.elements || [{ text: 'Untitled option' }];
       }
@@ -109,7 +135,10 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Text',
       type: 'text',
       icon: 'fa fa-font',
-      templateUrl: 'templates/types/input.tpl.html'
+      templateUrl: {
+        'default': 'templates/types/input.tpl.html',
+        'horizontal': 'templates/types/fieldset/horizontal_input.tpl.html'
+      }
     }, {
       text: 'Paragraph text',
       icon: 'fa fa-align-justify',
@@ -119,7 +148,10 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Multiple choice',
       icon: 'fa fa-dot-circle-o',
       type: 'radio',
-      templateUrl: 'templates/types/input-checkbox-radio.tpl.html',
+      templateUrl: {
+        'default': 'templates/types/input-checkbox-radio.tpl.html',
+        'horizontal': 'templates/types/fieldset/horizontal_select.tpl.html'
+      },
       initialize: function(element) {
         element.elements = element.elements || [{ text: 'Untitled option' }];
       }
