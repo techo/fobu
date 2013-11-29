@@ -17,9 +17,12 @@ angular.module('services.elementTransformer', [])
       var index = config.typeStringToIndex[element.type];
       var type  = config.types[index];
 
-      element.classes     = type.classes ? type.classes.split(' ') : [];
-      element.templateUrl = element.templateUrl || type.templateUrl;
+      element.classes = type.classes ? type.classes.split(' ') : [];
       element.controller  = element.controller || type.controller;
+      element.templateUrl = element.templateUrl || type.templateUrl;
+      if (typeof element.templateUrl === 'object') {
+        element.templateUrl = element.templateUrl['default'];
+      }
 
       if (! type.initialize) {
         return element;
