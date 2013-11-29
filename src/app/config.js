@@ -24,7 +24,10 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Fieldset',
       icon: 'fa fa-columns',
       type: 'fieldset',
-      templateUrl: 'templates/types/fieldset.tpl.html',
+      templateUrl: {
+        'default': 'templates/types/fieldset/default.tpl.html',
+        'horizontal': 'templates/types/fieldset/horizontal.tpl.html'
+      },
       properties: [{
         name: 'columns',
         text: 'Columns',
