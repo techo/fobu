@@ -14,6 +14,15 @@ angular.module('directives.formElementRenderer', [])
         $scope.$emit('element.select');
       };
 
+      $scope.check = function(value) {
+        var index = $scope.ngModel.value.indexOf(value);
+        if (index > -1) {
+          $scope.ngModel.value.splice(index, 1);
+        } else {
+          $scope.ngModel.value.push(value);
+        }
+      };
+
       $scope.range = function(n) {
         return new Array(parseInt(n, 10));
       };

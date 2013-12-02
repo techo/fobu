@@ -4,8 +4,8 @@
     <span class="help-block">{{ngModel.help}}</span>
   </div>
   <div class="col-md-4">
-    <select class="form-control">
-      <option ng-repeat="element in ngModel.elements">{{element.text}}</option>
+    <select name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value">
+      <option value="{{element.name}}" ng-repeat="element in ngModel.elements">{{element.text}}</option>
     </select>
   </div>
 </div>

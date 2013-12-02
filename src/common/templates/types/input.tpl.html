@@ -1,5 +1,5 @@
 <div class="form-group" ng-click="select()">
   <label for="">{{ngModel.text}}</label>
-  <input type="{{ngModel.type}}" class="form-control">
+  <input type="{{ngModel.type}}" name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value">
   <span class="help-block">{{ngModel.help}}</span>
 </div>
