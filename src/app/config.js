@@ -1,7 +1,7 @@
 angular.module('fobu.config', ['services.elementTransformer'])
 
 .factory('config', function(elementTransformer) {
-  config = {
+  var config = {
     types: [{
       text: 'Checkboxes',
       icon: 'fa fa-check-square-o',
