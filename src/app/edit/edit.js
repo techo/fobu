@@ -12,7 +12,7 @@ angular.module('fobu.edit', [
 
 .config(function($stateProvider) {
   $stateProvider.state('edit', {
-    url: '/edit',
+    url: '/:formId/edit',
     views: {
       'main': {
         controller: 'EditCtrl',
@@ -22,21 +22,10 @@ angular.module('fobu.edit', [
   });
 })
 
-.directive('adaptHeight', function() {
-  return function(scope, element, attrs) {
-    scope.$watchCollection(attrs.adaptHeight, function() {
-      element.children().css('minHeight', 'inherit');
-      setTimeout(function() {
-        element.children().css('minHeight', element.height());
-      }, 0);
-    });
-  };
-})
-
-.controller('EditCtrl', function($scope, Form, config, elementTransformer) {
+.controller('EditCtrl', function($scope, $stateParams, Form, config, elementTransformer) {
   $scope.config = config;
 
-  $scope.form = Form.get({ formId: 1 }, function() {
+  $scope.form = Form.get({ formId: $stateParams.formId }, function() {
     $scope.form = elementTransformer.transformRecursively($scope.form, config);
   });
 
@@ -137,6 +126,17 @@ angular.module('fobu.edit', [
         $scope.type = config.types[index];
       });
     }
+  };
+})
+
+.directive('adaptHeight', function() {
+  return function(scope, element, attrs) {
+    scope.$watchCollection(attrs.adaptHeight, function() {
+      element.children().css('minHeight', 'inherit');
+      setTimeout(function() {
+        element.children().css('minHeight', element.height());
+      }, 0);
+    });
   };
 })
 

@@ -8,7 +8,7 @@ angular.module('fobu', [
 ])
 
 .config(function myAppConfig($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/edit');
+  $urlRouterProvider.otherwise('/1/edit');
 })
 
 .run(function run() {

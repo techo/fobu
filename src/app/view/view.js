@@ -8,7 +8,7 @@ angular.module('fobu.view', [
 
 .config(function($stateProvider) {
   $stateProvider.state('view', {
-    url: '/view',
+    url: '/:formId',
     views: {
       'main': {
         controller: 'ViewCtrl',
@@ -18,8 +18,8 @@ angular.module('fobu.view', [
   });
 })
 
-.controller('ViewCtrl', function($scope, Form, config, elementTransformer) {
-  $scope.form = Form.get({ formId: 1 }, function() {
+.controller('ViewCtrl', function($scope, $stateParams, Form, config, elementTransformer) {
+  $scope.form = Form.get({ formId: $stateParams.formId }, function() {
     $scope.form = elementTransformer.transformRecursively($scope.form, config);
   });
 })
