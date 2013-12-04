@@ -12,9 +12,8 @@
     </div>
 
     <!-- Not editable -->
-
     <div ng-switch-default>
-      <div form-element-renderer ng-repeat="element in ngModel.elements" ng-model="element"></div>
+      <div form-element-renderer ng-repeat="element in ngModel.elements" ng-model="element" ng-readonly="$parent.readonly"></div>
     </div>
 
   </div>

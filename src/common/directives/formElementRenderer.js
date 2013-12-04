@@ -35,6 +35,10 @@ angular.module('directives.formElementRenderer', [])
     },
     link: function(scope, element, attrs) {
       scope.editable = 'editable' in attrs;
+      scope.readonly = 'readonly' in attrs;
+      attrs.$observe('readonly', function(readonly) {
+        scope.readonly = readonly === '' || readonly;
+      });
     }
   };
 })

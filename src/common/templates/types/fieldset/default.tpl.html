@@ -14,7 +14,7 @@
     <!-- Not editable -->
     <div class="row" ng-switch-default>
       <div ng-class="ngModel.columnClass()" ng-repeat="i in range(ngModel.columns) track by $index">
-        <div form-element-renderer ng-repeat="element in ngModel.elements | inColumn:$index+1" ng-model="element"></div>
+        <div form-element-renderer ng-repeat="element in ngModel.elements | inColumn:$index+1" ng-model="element" ng-readonly="$parent.readonly"></div>
       </div>
     </div>
 

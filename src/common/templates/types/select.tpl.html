@@ -1,5 +1,5 @@
 <div class="form-group" ng-click="select()">
   <label for="">{{ngModel.text}}</label>
-  <select name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value" ng-options="e.name as e.text for e in ngModel.elements"></select>
+  <select name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value" ng-options="e.name as e.text for e in ngModel.elements" ng-disabled="readonly"></select>
   <span class="help-block">{{ngModel.help}}</span>
 </div>
