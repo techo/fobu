@@ -3,6 +3,7 @@ angular.module('fobu', [
   'templates-common',
   'fobu.edit',
   'fobu.view',
+  'fobu.answers',
   'ui.state',
   'ui.route'
 ])
