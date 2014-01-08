@@ -101,6 +101,7 @@ angular.module('fobu.config', ['services.elementTransformer'])
           return 'col-md-12';
         };
         element.template = element.template || 'default';
+        element.elements = element.elements || [];
       }
     }, {
       text: 'Form',
