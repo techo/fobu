@@ -1,4 +1,5 @@
 angular.module('fobu', [
+  'fobu.config',
   'fobu.templates-app',
   'fobu.templates-common',
   'fobu.edit',
@@ -7,8 +8,13 @@ angular.module('fobu', [
   'ui.route'
 ])
 
-.run(function run() {
-
+.factory('fobu', function(config) {
+  return {
+    config: function(fn) {
+      fn(config);
+      config.initialize();
+    }
+  };
 })
 
 ;

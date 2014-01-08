@@ -157,20 +157,31 @@ angular.module('fobu.config', ['services.elementTransformer'])
       }
     }],
 
+    // It's populated in the config.initialize() method.
+    typeStringToIndex: {},
+
     enabledTypes: [
       'text', 'textarea', 'date', 'number', 'checkbox', 'radio', 'select', 'fieldset', 'column-break'
-    ]
+    ],
+
+    // It's populated in the config.initialize() method.
+    enabledTypesDefinitions: [],
+
+    initialize: function() {
+      config.typeStringToIndex = {};
+      for (var i = 0; i < config.types.length; i++) {
+        config.typeStringToIndex[config.types[i].type] = i;
+      }
+
+      config.enabledTypesDefinitions = [];
+      for (i = 0; i < config.enabledTypes.length; i++) {
+        var index = config.typeStringToIndex[config.enabledTypes[i]];
+        config.enabledTypesDefinitions.push(config.types[index]);
+      }
+    }
   };
 
-  config.typeStringToIndex = {};
-  for (var i = 0; i < config.types.length; i++) {
-    config.typeStringToIndex[config.types[i].type] = i;
-  }
-
-  for (i = 0; i < config.enabledTypes.length; i++) {
-    var index = config.typeStringToIndex[config.enabledTypes[i]];
-    config.enabledTypes[i] = config.types[index];
-  }
+  config.initialize();
 
   return config;
 })
