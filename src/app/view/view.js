@@ -1,6 +1,6 @@
 angular.module('fobu.view', [
   'fobu.config',
-  'ui.state',
+  'ui.router',
   'resources.form',
   'services.elementTransformer',
   'directives.formElementRenderer'

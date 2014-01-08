@@ -4,8 +4,7 @@ angular.module('fobu', [
   'fobu.templates-common',
   'fobu.edit',
   'fobu.view',
-  'ui.state',
-  'ui.route'
+  'ui.router'
 ])
 
 .factory('fobu', function(config) {
