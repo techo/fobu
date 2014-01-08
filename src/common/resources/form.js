@@ -1,11 +1,11 @@
 angular.module('resources.form', [
+  'fobu.config',
   'ngResource',
   'services.elementTransformer'
 ])
 
-.factory('Form', function($resource, $http, elementTransformer) {
-  return $resource('http://localhost\\:3000/api/:formId/:answersId', { formId: '@formId', answersId: '@answersId' }, {
-//  return $resource('http://localhost/pilote/encuesta/:formId?_format=json', { formId: '@id' }, {
+.factory('Form', function($resource, $http, config, elementTransformer) {
+  return $resource(config.uri.form, { formId: '@formId', answersId: '@answersId' }, {
     save: {
       method: 'POST',
       transformRequest: [function(data, headers) {

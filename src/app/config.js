@@ -167,6 +167,10 @@ angular.module('fobu.config', ['services.elementTransformer'])
     // It's populated in the config.initialize() method.
     enabledTypesDefinitions: [],
 
+    uri: {
+      form: 'http://localhost:3000/api/:formId/:answersId'
+    },
+
     initialize: function() {
       config.typeStringToIndex = {};
       for (var i = 0; i < config.types.length; i++) {
