@@ -19,15 +19,41 @@ angular.module('fobu.edit', [
         templateUrl: 'edit/edit.tpl.html'
       }
     }
+  }).state('new', {
+    url: '/edit',
+    views: {
+      'main': {
+        controller: 'EditCtrl',
+        templateUrl: 'edit/edit.tpl.html'
+      }
+    }
   });
 })
 
 .controller('EditCtrl', function($scope, $stateParams, Form, config, elementTransformer) {
   $scope.config = config;
 
-  $scope.form = Form.get({ formId: $stateParams.formId }, function() {
+  if ($stateParams.formId) {
+    $scope.form = Form.get({ formId: $stateParams.formId }, function() {
+      $scope.form = elementTransformer.transformRecursively($scope.form, config);
+    });
+  } else {
+    $scope.form = new Form({
+      text: 'Untitled form',
+      type: 'form',
+      elements: [{
+        text: 'Untitled fieldset',
+        type: 'fieldset',
+        elements: [{
+          text: 'Untitled question',
+          type: 'text'
+        }, {
+          type: 'column-break'
+        }]
+      }]
+    });
     $scope.form = elementTransformer.transformRecursively($scope.form, config);
-  });
+  }
 
   $scope.save = function() {
     $scope.form.$save(function() {
