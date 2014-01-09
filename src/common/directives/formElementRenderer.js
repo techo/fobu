@@ -15,6 +15,8 @@ angular.module('directives.formElementRenderer', [])
       };
 
       $scope.check = function(value) {
+        $scope.ngModel.value = $scope.ngModel.value || [];
+
         var index = $scope.ngModel.value.indexOf(value);
         if (index > -1) {
           $scope.ngModel.value.splice(index, 1);
