@@ -123,7 +123,7 @@ module.exports = function ( grunt ) {
       build_appjs: {
         files: [
           {
-            src: [ '<%= app_files.js %>' ],
+            src: [ '<%= lib_files.js %>' ],
             dest: '<%= build_dir %>/',
             cwd: '.',
             expand: true
@@ -200,7 +200,7 @@ module.exports = function ( grunt ) {
         },
         expand: true,
         cwd: '.',
-        src: [ '<%= app_files.coffee %>' ],
+        src: [ '<%= lib_files.coffee %>' ],
         dest: '<%= build_dir %>',
         ext: '.js'
       }
@@ -214,7 +214,7 @@ module.exports = function ( grunt ) {
       compile: {
         files: [
           {
-            src: [ '<%= app_files.js %>' ],
+            src: [ '<%= lib_files.js %>' ],
             cwd: '<%= build_dir %>',
             dest: '<%= build_dir %>',
             expand: true
@@ -244,7 +244,7 @@ module.exports = function ( grunt ) {
      */
     less: {
       build: {
-        src: [ '<%= app_files.less %>' ],
+        src: [ '<%= lib_files.less %>' ],
         dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
       },
       compile: {
@@ -266,10 +266,10 @@ module.exports = function ( grunt ) {
      */
     jshint: {
       src: [ 
-        '<%= app_files.js %>'
+        '<%= lib_files.js %>'
       ],
       test: [
-        '<%= app_files.jsunit %>'
+        '<%= lib_files.jsunit %>'
       ],
       gruntfile: [
         'Gruntfile.js'
@@ -294,12 +294,12 @@ module.exports = function ( grunt ) {
     coffeelint: {
       src: {
         files: {
-          src: [ '<%= app_files.coffee %>' ]
+          src: [ '<%= lib_files.coffee %>' ]
         }
       },
       test: {
         files: {
-          src: [ '<%= app_files.coffeeunit %>' ]
+          src: [ '<%= lib_files.coffeeunit %>' ]
         }
       }
     },
@@ -319,7 +319,7 @@ module.exports = function ( grunt ) {
           base: 'src/app',
           module: 'fobu.templates-app'
         },
-        src: [ '<%= app_files.atpl %>' ],
+        src: [ '<%= lib_files.atpl %>' ],
         dest: '<%= build_dir %>/templates-app.js'
       },
 
@@ -331,7 +331,7 @@ module.exports = function ( grunt ) {
           base: 'src/common',
           module: 'fobu.templates-common'
         },
-        src: [ '<%= app_files.ctpl %>' ],
+        src: [ '<%= lib_files.ctpl %>' ],
         dest: '<%= build_dir %>/templates-common.js'
       }
     },
@@ -456,7 +456,7 @@ module.exports = function ( grunt ) {
        */
       jssrc: {
         files: [ 
-          '<%= app_files.js %>'
+          '<%= lib_files.js %>'
         ],
         tasks: [ 'jshint:src', /*'karma:unit:run',*/ 'copy:build_appjs' ]
       },
@@ -468,7 +468,7 @@ module.exports = function ( grunt ) {
       /*
       coffeesrc: {
         files: [ 
-          '<%= app_files.coffee %>'
+          '<%= lib_files.coffee %>'
         ],
         tasks: [ 'coffeelint:src', 'coffee:source', 'karma:unit:run', 'copy:build_appjs' ]
       },
@@ -489,7 +489,7 @@ module.exports = function ( grunt ) {
        * When index.html changes, we need to compile it.
        */
       html: {
-        files: [ '<%= app_files.html %>' ],
+        files: [ '<%= lib_files.html %>' ],
         tasks: [ 'index:build' ]
       },
 
@@ -498,8 +498,8 @@ module.exports = function ( grunt ) {
        */
       tpls: {
         files: [ 
-          '<%= app_files.atpl %>', 
-          '<%= app_files.ctpl %>'
+          '<%= lib_files.atpl %>', 
+          '<%= lib_files.ctpl %>'
         ],
         tasks: [ 'html2js' ]
       },
@@ -518,7 +518,7 @@ module.exports = function ( grunt ) {
        */
       jsunit: {
         files: [
-          '<%= app_files.jsunit %>'
+          '<%= lib_files.jsunit %>'
         ],
         tasks: [ 'jshint:test'/*, 'karma:unit:run'*/ ],
         options: {
@@ -533,7 +533,7 @@ module.exports = function ( grunt ) {
       /*
       coffeeunit: {
         files: [
-          '<%= app_files.coffeeunit %>'
+          '<%= lib_files.coffeeunit %>'
         ],
         tasks: [ 'coffeelint:test', 'karma:unit:run' ],
         options: {
@@ -576,7 +576,7 @@ module.exports = function ( grunt ) {
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify'
+    'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js'//, 'uglify'
   ]);
 
   /**

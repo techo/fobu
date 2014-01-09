@@ -30,7 +30,7 @@ $ grunt watch
 Configuration
 -------------
 
-The configuration file is located at `app/config.js` and it has the following options:
+The configuration file is located at `lib/config.js` and it has the following options:
 
 ```
 var config = {
