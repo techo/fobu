@@ -5,7 +5,7 @@
   <div class="panel-body" ng-switch="editable">
 
     <!-- Editable -->
-    <div class="row" ng-switch-when="true" adapt-height="ngModel.elements">
+    <div class="row" ng-switch-when="true" adapt-height="ngModel.elements" adapt-height-min="50">
       <div ng-class="ngModel.columnClass()" sortable connect-to=".form-element .ui-sortable" ng-model="ngModel.elements" ng-repeat="i in range(ngModel.columns) track by $index" offset="{{(ngModel.elements | inColumn:$index+1:'<').length}}">
         <div ng-class="{ 'sortable-not': ngModel.type === 'column-break' }" form-element-renderer editable ng-repeat="element in ngModel.elements | inColumn:$index+1" ng-model="element"></div>
       </div>

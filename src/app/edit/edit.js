@@ -160,7 +160,11 @@ angular.module('fobu.edit', [
     scope.$watchCollection(attrs.adaptHeight, function() {
       element.children().css('minHeight', 'inherit');
       setTimeout(function() {
-        element.children().css('minHeight', element.height());
+        var height = element.height();
+        if (height < attrs.adaptHeightMin) {
+          height = parseInt(attrs.adaptHeightMin, 10);
+        }
+        element.children().css('minHeight', height);
       }, 0);
     });
   };
