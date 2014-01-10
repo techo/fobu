@@ -120,10 +120,20 @@ module.exports = function ( grunt ) {
           }
        ]   
       },
-      build_appjs: {
+      build_libjs: {
         files: [
           {
             src: [ '<%= lib_files.js %>' ],
+            dest: '<%= build_dir %>/',
+            cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      build_appjs: {
+        files: [
+          {
+            src: [ '<%= app_files.js %>' ],
             dest: '<%= build_dir %>/',
             cwd: '.',
             expand: true
@@ -265,11 +275,13 @@ module.exports = function ( grunt ) {
      * nonetheless inside `src/`.
      */
     jshint: {
-      src: [ 
-        '<%= lib_files.js %>'
+      src: [
+        '<%= lib_files.js %>',
+        '<%= app_files.js %>'
       ],
       test: [
-        '<%= lib_files.jsunit %>'
+        '<%= lib_files.jsunit %>',
+        '<%= app_files.jsunit %>'
       ],
       gruntfile: [
         'Gruntfile.js'
@@ -317,7 +329,10 @@ module.exports = function ( grunt ) {
       app: {
         options: {
           base: 'src/app',
-          module: 'fobu.templates-app'
+          module: 'fobu.templates-app',
+          rename: function(name) {
+            return name.replace(/^.*?lib\//, 'fobu/');
+          }
         },
         src: [ '<%= lib_files.atpl %>' ],
         dest: '<%= build_dir %>/templates-app.js'
@@ -329,7 +344,10 @@ module.exports = function ( grunt ) {
       common: {
         options: {
           base: 'src/common',
-          module: 'fobu.templates-common'
+          module: 'fobu.templates-common',
+          rename: function(name) {
+            return 'fobu/' + name;
+          }
         },
         src: [ '<%= lib_files.ctpl %>' ],
         dest: '<%= build_dir %>/templates-common.js'
@@ -455,31 +473,19 @@ module.exports = function ( grunt ) {
        * run our unit tests.
        */
       jssrc: {
-        files: [ 
-          '<%= lib_files.js %>'
+        files: [
+          '<%= lib_files.js %>',
+          '<%= app_files.js %>'
         ],
-        tasks: [ 'jshint:src', /*'karma:unit:run',*/ 'copy:build_appjs' ]
+        tasks: [ 'jshint:src', 'copy:build_libjs', 'copy:build_appjs' ]
       },
-
-      /**
-       * When our CoffeeScript source files change, we want to run lint them and
-       * run our unit tests.
-       */
-      /*
-      coffeesrc: {
-        files: [ 
-          '<%= lib_files.coffee %>'
-        ],
-        tasks: [ 'coffeelint:src', 'coffee:source', 'karma:unit:run', 'copy:build_appjs' ]
-      },
-      */
 
       /**
        * When assets are changed, copy them. Note that this will *not* copy new
        * files, so this is probably not very useful.
        */
       assets: {
-        files: [ 
+        files: [
           'src/assets/**/*'
         ],
         tasks: [ 'copy:build_app_assets' ]
@@ -497,8 +503,8 @@ module.exports = function ( grunt ) {
        * When our templates change, we only rewrite the template cache.
        */
       tpls: {
-        files: [ 
-          '<%= lib_files.atpl %>', 
+        files: [
+          '<%= lib_files.atpl %>',
           '<%= lib_files.ctpl %>'
         ],
         tasks: [ 'html2js' ]
@@ -524,23 +530,7 @@ module.exports = function ( grunt ) {
         options: {
           livereload: false
         }
-      }/*,
-
-      /**
-       * When a CoffeeScript unit test file changes, we only want to lint it and
-       * run the unit tests. We don't want to do any live reloading.
-       */
-      /*
-      coffeeunit: {
-        files: [
-          '<%= lib_files.coffeeunit %>'
-        ],
-        tasks: [ 'coffeelint:test', 'karma:unit:run' ],
-        options: {
-          livereload: false
-        }
       }
-      */
     }
   };
 
@@ -554,7 +544,7 @@ module.exports = function ( grunt ) {
    * before watching for changes.
    */
   grunt.renameTask( 'watch', 'delta' );
-  grunt.registerTask( 'watch', [ 'build', /*'karma:unit',*/ 'connect', 'delta' ] );
+  grunt.registerTask( 'watch', [ 'build', 'build_app', 'connect', 'delta' ] );
 
   /**
    * The default task is to build and compile.
@@ -562,25 +552,31 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'default', [ 'build', 'compile' ] );
 
   /**
-   * The `build` task gets your app ready to run for development and testing.
+   * The `build` task gets your lib ready to run for development and testing.
    */
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint', /*'coffeelint', 'coffee',*/ 'less:build',
-    'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'index:build'/*, 'karmaconfig',
-    'karma:continuous' */
+    'clean', 'html2js', 'jshint', 'less:build', 'concat:build_css',
+    'copy:build_app_assets', 'copy:build_vendor_assets', 'copy:build_libjs',
+    'copy:build_vendorjs'
   ]);
 
   /**
-   * The `compile` task gets your app ready for deployment by concatenating and
+   * The `build_app` ...
+   */
+  grunt.registerTask( 'build_app', [
+    'copy:build_appjs', 'index:build'
+  ]);
+
+  /**
+   * The `compile` task gets your lib ready for deployment by concatenating and
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js'//, 'uglify'
+    'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify'
   ]);
 
   /**
-   * A utility function to get all app JavaScript sources.
+   * A utility function to get all lib JavaScript sources.
    */
   function filterForJS ( files ) {
     return files.filter( function ( file ) {
@@ -589,7 +585,7 @@ module.exports = function ( grunt ) {
   }
 
   /**
-   * A utility function to get all app CSS sources.
+   * A utility function to get all lib CSS sources.
    */
   function filterForCSS ( files ) {
     return files.filter( function ( file ) {
@@ -597,7 +593,7 @@ module.exports = function ( grunt ) {
     });
   }
 
-  /** 
+  /**
    * The index.html template includes the stylesheet and javascript sources
    * based on dynamic names calculated in this Gruntfile. This task assembles
    * the list into variables for the template to use and then runs the

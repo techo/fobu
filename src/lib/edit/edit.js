@@ -1,6 +1,7 @@
 angular.module('fobu.edit', [
   'fobu.config',
-  'ui.router',
+  'fobu.templates-app',
+  'fobu.templates-common',
   'resources.form',
   'services.elementTransformer',
   'directives.formElementRenderer',
@@ -10,27 +11,7 @@ angular.module('fobu.edit', [
   'ngAnimate'
 ])
 
-.config(function($stateProvider) {
-  $stateProvider.state('edit', {
-    url: '/:formId/edit',
-    views: {
-      'main': {
-        controller: 'EditCtrl',
-        templateUrl: 'edit/edit.tpl.html'
-      }
-    }
-  }).state('new', {
-    url: '/edit',
-    views: {
-      'main': {
-        controller: 'EditCtrl',
-        templateUrl: 'edit/edit.tpl.html'
-      }
-    }
-  });
-})
-
-.controller('EditCtrl', function($scope, $stateParams, Form, config, elementTransformer) {
+.controller('FobuEditCtrl', function($scope, $stateParams, Form, config, elementTransformer) {
   $scope.config = config;
 
   if ($stateParams.formId) {

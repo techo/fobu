@@ -20,17 +20,25 @@ module.exports = {
    * lib's unit tests.
    */
   lib_files: {
-    js: [ 'src/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js' ],
-    jsunit: [ 'src/**/*.spec.js' ],
+    js: [ 'src/**/*.js', '!src/app/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js' ],
+    jsunit: [ 'src/lib/**/*.spec.js' ],
 
-    coffee: [ 'src/**/*.coffee', '!src/**/*.spec.coffee' ],
-    coffeeunit: [ 'src/**/*.spec.coffee' ],
+    coffee: [ 'src/lib/**/*.coffee', '!src/lib/**/*.spec.coffee' ],
+    coffeeunit: [ 'src/lib/**/*.spec.coffee' ],
 
     atpl: [ 'src/lib/**/*.tpl.html' ],
     ctpl: [ 'src/common/**/*.tpl.html' ],
 
     html: [ 'src/index.html' ],
     less: 'src/less/main.less'
+  },
+
+  /**
+   *
+   */
+  app_files: {
+    js: [ 'src/app/**/*.js', '!src/app/**/*.spec.js' ],
+    jsunit: [ 'src/app/**/*.spec.js' ]
   },
 
   /**

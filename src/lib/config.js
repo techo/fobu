@@ -6,7 +6,7 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Checkboxes',
       icon: 'fa fa-check-square-o',
       type: 'checkbox',
-      templateUrl: 'templates/types/input-checkbox-radio.tpl.html',
+      templateUrl: 'fobu/templates/types/input-checkbox-radio.tpl.html',
       initialize: function(element) {
         element.elements = element.elements || [{ text: 'Untitled option' }];
       }
@@ -14,22 +14,22 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Column break',
       icon: 'fa fa-meh-o',
       type: 'column-break',
-      templateUrl: 'templates/types/column-break.tpl.html'
+      templateUrl: 'fobu/templates/types/column-break.tpl.html'
     }, {
       text: 'Date',
       icon: 'fa fa-calendar',
       type: 'date',
       templateUrl: {
-        'default': 'templates/types/input.tpl.html',
-        'horizontal': 'templates/types/fieldset/horizontal_input.tpl.html'
+        'default': 'fobu/templates/types/input.tpl.html',
+        'horizontal': 'fobu/templates/types/fieldset/horizontal_input.tpl.html'
       }
     }, {
       text: 'Fieldset',
       icon: 'fa fa-columns',
       type: 'fieldset',
       templateUrl: {
-        'default': 'templates/types/fieldset/default.tpl.html',
-        'horizontal': 'templates/types/fieldset/horizontal.tpl.html'
+        'default': 'fobu/templates/types/fieldset/default.tpl.html',
+        'horizontal': 'fobu/templates/types/fieldset/horizontal.tpl.html'
       },
       properties: [{
         name: 'columns',
@@ -107,7 +107,7 @@ angular.module('fobu.config', ['services.elementTransformer'])
       text: 'Form',
       icon: 'fa fa-meh-o',
       type: 'form',
-      templateUrl: 'templates/types/form.tpl.html',
+      templateUrl: 'fobu/templates/types/form.tpl.html',
       controller: function($scope, $element, $attrs) {
         $scope.stopSorting = function() {
           $element.find("> .sorting").removeClass('sorting');
@@ -118,16 +118,16 @@ angular.module('fobu.config', ['services.elementTransformer'])
       icon: 'fa fa-meh-o',
       type: 'number',
       templateUrl: {
-        'default': 'templates/types/input.tpl.html',
-        'horizontal': 'templates/types/fieldset/horizontal_input.tpl.html'
+        'default': 'fobu/templates/types/input.tpl.html',
+        'horizontal': 'fobu/templates/types/fieldset/horizontal_input.tpl.html'
       }
     }, {
       text: 'Dropdown',
       icon: 'fa fa-list-alt',
       type: 'select',
       templateUrl: {
-        'default': 'templates/types/select.tpl.html',
-        'horizontal': 'templates/types/fieldset/horizontal_select.tpl.html'
+        'default': 'fobu/templates/types/select.tpl.html',
+        'horizontal': 'fobu/templates/types/fieldset/horizontal_select.tpl.html'
       },
       initialize: function(element) {
         element.elements = element.elements || [{ text: 'Untitled option' }];
@@ -137,21 +137,21 @@ angular.module('fobu.config', ['services.elementTransformer'])
       type: 'text',
       icon: 'fa fa-font',
       templateUrl: {
-        'default': 'templates/types/input.tpl.html',
-        'horizontal': 'templates/types/fieldset/horizontal_input.tpl.html'
+        'default': 'fobu/templates/types/input.tpl.html',
+        'horizontal': 'fobu/templates/types/fieldset/horizontal_input.tpl.html'
       }
     }, {
       text: 'Paragraph text',
       icon: 'fa fa-align-justify',
       type: 'textarea',
-      templateUrl: 'templates/types/textarea.tpl.html'
+      templateUrl: 'fobu/templates/types/textarea.tpl.html'
     }, {
       text: 'Multiple choice',
       icon: 'fa fa-dot-circle-o',
       type: 'radio',
       templateUrl: {
-        'default': 'templates/types/input-checkbox-radio.tpl.html',
-        'horizontal': 'templates/types/fieldset/horizontal_select.tpl.html'
+        'default': 'fobu/templates/types/input-checkbox-radio.tpl.html',
+        'horizontal': 'fobu/templates/types/fieldset/horizontal_select.tpl.html'
       },
       initialize: function(element) {
         element.elements = element.elements || [{ text: 'Untitled option' }];
