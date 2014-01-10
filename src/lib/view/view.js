@@ -2,9 +2,9 @@ angular.module('fobu.view', [
   'fobu.config',
   'fobu.templates-app',
   'fobu.templates-common',
-  'resources.form',
-  'services.elementTransformer',
-  'directives.formElementRenderer'
+  'fobu.resources.form',
+  'fobu.services.elementTransformer',
+  'fobu.directives.formElementRenderer'
 ])
 
 .controller('FobuViewCtrl', function($scope, $stateParams, Form, config, elementTransformer) {

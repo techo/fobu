@@ -1,4 +1,4 @@
-angular.module('directives.draggable', [])
+angular.module('fobu.directives.draggable', [])
 
 .directive('draggable', function() {
   return {

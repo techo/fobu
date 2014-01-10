@@ -1,4 +1,4 @@
-angular.module('services.elementTransformer', [])
+angular.module('fobu.services.elementTransformer', [])
 
 .factory('elementTransformer', function() {
   return {

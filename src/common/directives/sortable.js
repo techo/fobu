@@ -1,4 +1,4 @@
-angular.module('directives.sortable', ['ngAnimate'])
+angular.module('fobu.directives.sortable', ['ngAnimate'])
 
 .directive('sortable', function($animate) {
 

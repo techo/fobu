@@ -1,4 +1,4 @@
-angular.module('directives.tab', [])
+angular.module('fobu.directives.tab', [])
 
 .directive('tab', function() {
   return {

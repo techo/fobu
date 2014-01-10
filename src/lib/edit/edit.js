@@ -2,12 +2,12 @@ angular.module('fobu.edit', [
   'fobu.config',
   'fobu.templates-app',
   'fobu.templates-common',
-  'resources.form',
-  'services.elementTransformer',
-  'directives.formElementRenderer',
-  'directives.draggable',
-  'directives.sortable',
-  'directives.tab',
+  'fobu.resources.form',
+  'fobu.services.elementTransformer',
+  'fobu.directives.formElementRenderer',
+  'fobu.directives.draggable',
+  'fobu.directives.sortable',
+  'fobu.directives.tab',
   'ngAnimate'
 ])
 

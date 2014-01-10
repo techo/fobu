@@ -1,4 +1,4 @@
-angular.module('directives.formElementRenderer', [])
+angular.module('fobu.directives.formElementRenderer', [])
 
 .directive('formElementRenderer', function() {
   return {

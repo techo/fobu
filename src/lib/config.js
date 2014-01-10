@@ -1,4 +1,4 @@
-angular.module('fobu.config', ['services.elementTransformer'])
+angular.module('fobu.config', ['fobu.services.elementTransformer'])
 
 .factory('config', function(elementTransformer) {
   var config = {

@@ -1,7 +1,7 @@
-angular.module('resources.form', [
+angular.module('fobu.resources.form', [
   'fobu.config',
   'ngResource',
-  'services.elementTransformer'
+  'fobu.services.elementTransformer'
 ])
 
 .factory('Form', function($resource, $http, config, elementTransformer) {
