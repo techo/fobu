@@ -1,10 +1,7 @@
 angular.module('fobu', [
   'fobu.config',
-  'fobu.templates-app',
-  'fobu.templates-common',
-  'fobu.edit',
-  'fobu.view',
-  'ui.router'
+  'fobu.directives.formElementRenderer',
+  'fobu.resources.form'
 ])
 
 .factory('fobu', function(config) {
