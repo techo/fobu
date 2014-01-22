@@ -4,7 +4,8 @@ angular.module('fobu.view', [
   'fobu.templates-common',
   'fobu.resources.form',
   'fobu.services.elementTransformer',
-  'fobu.directives.formElementRenderer'
+  'fobu.directives.formElementRenderer',
+  'fobu.filters.inColumn'
 ])
 
 .controller('FobuViewCtrl', function($scope, $stateParams, Form, config, elementTransformer) {

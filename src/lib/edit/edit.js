@@ -8,6 +8,7 @@ angular.module('fobu.edit', [
   'fobu.directives.draggable',
   'fobu.directives.sortable',
   'fobu.directives.tab',
+  'fobu.filters.inColumn',
   'ngAnimate'
 ])
 
@@ -148,27 +149,6 @@ angular.module('fobu.edit', [
         element.children().css('minHeight', height);
       }, 0);
     });
-  };
-})
-
-.filter('inColumn', function() {
-  return function(elements, column, comparator) {
-    // Zero-index the column argument
-    --column;
-
-    var output = [];
-    for (var i = 0, currentColumn = 0; i < elements.length; i++) {
-      switch (comparator || '=') {
-        case '=': if (currentColumn == column) { output.push(elements[i]); } break;
-        case '<': if (currentColumn <  column) { output.push(elements[i]); } break;
-        case '>': if (currentColumn >  column) { output.push(elements[i]); } break;
-      }
-      if (elements[i].type == 'column-break') {
-        ++currentColumn;
-      }
-    }
-
-    return output;
   };
 })
 
