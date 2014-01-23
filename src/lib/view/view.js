@@ -9,7 +9,12 @@ angular.module('fobu.view', [
 ])
 
 .controller('FobuViewCtrl', function($scope, $stateParams, Form, config, elementTransformer) {
-  $scope.form = Form.get({ formId: $stateParams.formId }, function() {
+  var formId = $stateParams.formId;
+  if ($stateParams.nestedFormId) {
+    formId = $stateParams.nestedFormId.substr(1);
+  }
+
+  $scope.form = Form.get({ formId: formId }, function() {
     $scope.form = elementTransformer.transformRecursively($scope.form, config);
   });
 })

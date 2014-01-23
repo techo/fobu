@@ -6,7 +6,7 @@ angular.module('app', [
 
 .config(function($stateProvider) {
   $stateProvider.state('view', {
-    url: '/:formId',
+    url: '/{formId}{nestedFormId:(?:/[^/]+)?}',
     views: {
       'main': {
         controller: 'FobuViewCtrl',
@@ -14,7 +14,7 @@ angular.module('app', [
       }
     }
   }).state('edit', {
-    url: '/:formId/edit',
+    url: '/{formId}/edit',
     views: {
       'main': {
         controller: 'FobuEditCtrl',
