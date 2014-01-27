@@ -14,22 +14,23 @@ angular.module('fobu.view', [
     return;
   }
 
-  var form = Form.get({ formId: $stateParams.formId }, function() {
-    form = elementTransformer.transformRecursively(form, fobuConfig);
+  $scope.form = Form.get({ formId: $stateParams.formId }, function() {
+    $scope.form = elementTransformer.transformRecursively($scope.form, fobuConfig);
   });
 
   if ($stateParams.nestedFormId) {
-    form.$promise.then(function() {
-      var nestedFormElement = findElementById(form.elements, $stateParams.nestedFormId);
+    $scope.form.$promise.then(function() {
+      var nestedFormElement = findElementById($scope.form.elements, $stateParams.nestedFormId);
       if (nestedFormElement) {
         $scope.form = Form.get({ formId: nestedFormElement.formId }, function() {
           $scope.form = elementTransformer.transformRecursively($scope.form, fobuConfig);
+          elementFiller.fill($scope.form, fobuConfig.getDataProvider(), [nestedFormElement, $stateParams.row]);
         });
       }
     });
   } else {
-    form.$promise.then(function() {
-      $scope.form = form;
+    $scope.form.$promise.then(function() {
+      elementFiller.fill($scope.form, fobuConfig.getDataProvider());
     });
   }
 
