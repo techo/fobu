@@ -25,7 +25,7 @@
         <div class="tab-pane" id="elements">
           <div class="row">
             <div class="col-md-6">
-              <div style="font-size: 13px; cursor: move;" ng-repeat="type in config.enabledTypesDefinitions" draggable connect-to=".form-element .ui-sortable" ng-model="type">
+              <div style="font-size: 13px; cursor: move;" ng-repeat="type in fobuConfig.enabledTypesDefinitions" draggable connect-to=".form-element .ui-sortable" ng-model="type">
                 <span class="{{type.icon}}"></span> {{type.text}}
               </div>
             </div>

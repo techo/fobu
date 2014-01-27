@@ -4,11 +4,11 @@ angular.module('fobu', [
   'fobu.resources.form'
 ])
 
-.factory('fobu', function(config) {
+.factory('fobu', function(fobuConfig) {
   return {
     config: function(fn) {
-      fn(config);
-      config.initialize();
+      fn(fobuConfig);
+      fobuConfig.initialize();
     }
   };
 })

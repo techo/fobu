@@ -12,12 +12,12 @@ angular.module('fobu.edit', [
   'ngAnimate'
 ])
 
-.controller('FobuEditCtrl', function($scope, $stateParams, Form, config, elementTransformer) {
-  $scope.config = config;
+.controller('FobuEditCtrl', function($scope, $stateParams, Form, fobuConfig, elementTransformer) {
+  $scope.fobuConfig = fobuConfig;
 
   if ($stateParams.formId) {
     $scope.form = Form.get({ formId: $stateParams.formId }, function() {
-      $scope.form = elementTransformer.transformRecursively($scope.form, config);
+      $scope.form = elementTransformer.transformRecursively($scope.form, fobuConfig);
     });
   } else {
     $scope.form = new Form({
@@ -34,12 +34,12 @@ angular.module('fobu.edit', [
         }]
       }]
     });
-    $scope.form = elementTransformer.transformRecursively($scope.form, config);
+    $scope.form = elementTransformer.transformRecursively($scope.form, fobuConfig);
   }
 
   $scope.save = function() {
     $scope.form.$save(function() {
-      $scope.form  = elementTransformer.transformRecursively($scope.form, config);
+      $scope.form  = elementTransformer.transformRecursively($scope.form, fobuConfig);
     });
   };
 
@@ -73,7 +73,7 @@ angular.module('fobu.edit', [
       var element = elementTransformer.transform({
         text: 'Untitled question',
         type: $scope.selectedType.type
-      }, config, e.targetScope.ngModel);
+      }, fobuConfig, e.targetScope.ngModel);
       ngModel.$modelValue.splice(position, 0, element);
 
       select(element);
@@ -115,7 +115,7 @@ angular.module('fobu.edit', [
 .directive('properties', function() {
   return {
     scope: true,
-    controller: function($scope, config) {
+    controller: function($scope, fobuConfig) {
       $scope.remove = function() {
         var index = $scope.selection.parent().elements.indexOf($scope.selection);
         $scope.selection.parent().elements.splice(index, 1);
@@ -130,8 +130,8 @@ angular.module('fobu.edit', [
       };
 
       $scope.$watch('selection.type', function(type) {
-        var index = config.typeStringToIndex[type];
-        $scope.type = config.types[index];
+        var index = fobuConfig.typeStringToIndex[type];
+        $scope.type = fobuConfig.types[index];
       });
     }
   };

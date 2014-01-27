@@ -4,8 +4,8 @@ angular.module('fobu.resources.form', [
   'fobu.services.elementTransformer'
 ])
 
-.factory('Form', function($resource, $http, config, elementTransformer) {
-  return $resource(config.uri.form, { formId: '@formId', answersId: '@answersId' }, {
+.factory('Form', function($resource, $http, fobuConfig, elementTransformer) {
+  return $resource(fobuConfig.uri.form, { formId: '@formId', answersId: '@answersId' }, {
     save: {
       method: 'POST',
       transformRequest: [function(data, headers) {
