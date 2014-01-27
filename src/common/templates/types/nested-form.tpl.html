@@ -12,7 +12,7 @@
     <div class="row" ng-switch-default>
 
       <!--
-      <a class="btn btn-primary" ui-sref="nestedView({nestedFormId: 2})">
+      <a class="btn btn-primary" ui-sref="view.nestedNew({nestedFormId: ngModel.id})">
         <span class="glyphicon glyphicon-plus"></span> New
       </a>
       -->
@@ -22,9 +22,9 @@
           <tr>
             <th ng-repeat="element in ngModel.elements">{{element.text}}</th>
             <th>
-              <button class="btn btn-primary btn-xs">
+              <a class="btn btn-primary btn-xs" ui-sref="view.nestedNew({nestedFormId: ngModel.id})">
                 <span class="glyphicon glyphicon-plus"></span> New
-              </button>
+              </a>
             </th>
           </tr>
         </thead>
@@ -32,9 +32,9 @@
           <tr ng-repeat="row in ngModel.value">
             <td ng-repeat="element in ngModel.elements">{{row[element.name]}}</td>
             <td>
-              <button class="btn btn-default btn-xs">
+              <a class="btn btn-default btn-xs" ui-sref="view.nested({nestedFormId: ngModel.id, row: $index})">
                 Details
-              </button>
+              </a>
               <button class="btn btn-link btn-xs">
                 Delete
               </button>

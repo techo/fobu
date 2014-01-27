@@ -6,21 +6,25 @@ angular.module('app', [
 
 .config(function($stateProvider) {
   $stateProvider.state('view', {
+    abstract: true,
+    views: {
+      'main': {
+        controller: 'FobuViewCtrl',
+        template: '<ui-view />'
+      }
+    }
+  }).state('view.main', {
     url: '/{formId}',
-    views: {
-      'main': {
-        controller: 'FobuViewCtrl',
-        templateUrl: 'fobu/view/view.tpl.html'
-      }
-    }
-  }).state('nestedView', {
+    controller: 'FobuViewCtrl',
+    templateUrl: 'fobu/view/view.tpl.html'
+  }).state('view.nested', {
+    url: '/{formId}/{nestedFormId}/{row}',
+    controller: 'FobuViewCtrl',
+    templateUrl: 'fobu/view/view.tpl.html'
+  }).state('view.nestedNew', {
     url: '/{formId}/{nestedFormId}',
-    views: {
-      'main': {
-        controller: 'FobuViewCtrl',
-        templateUrl: 'fobu/view/view.tpl.html'
-      }
-    }
+    controller: 'FobuViewCtrl',
+    templateUrl: 'fobu/view/view.tpl.html'
   }).state('edit', {
     url: '/{formId}/edit',
     views: {
