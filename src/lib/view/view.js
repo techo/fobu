@@ -11,7 +11,7 @@ angular.module('fobu.view', [
 .controller('FobuViewCtrl', function($scope, $stateParams, Form, config, elementTransformer) {
   var formId = $stateParams.formId;
   if ($stateParams.nestedFormId) {
-    formId = $stateParams.nestedFormId.substr(1);
+    formId = $stateParams.nestedFormId;
   }
 
   $scope.form = Form.get({ formId: formId }, function() {

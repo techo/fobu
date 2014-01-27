@@ -114,6 +114,11 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
         };
       }
     }, {
+      text: 'Form',
+      icon: 'fa fa-meh-o',
+      type: 'nested-form',
+      templateUrl: 'fobu/templates/types/nested-form.tpl.html'
+    }, {
       text: 'Number',
       icon: 'fa fa-meh-o',
       type: 'number',

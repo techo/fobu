@@ -6,7 +6,15 @@ angular.module('app', [
 
 .config(function($stateProvider) {
   $stateProvider.state('view', {
-    url: '/{formId}{nestedFormId:(?:/[^/]+)?}',
+    url: '/{formId}',
+    views: {
+      'main': {
+        controller: 'FobuViewCtrl',
+        templateUrl: 'fobu/view/view.tpl.html'
+      }
+    }
+  }).state('nestedView', {
+    url: '/{formId}/{nestedFormId}',
     views: {
       'main': {
         controller: 'FobuViewCtrl',

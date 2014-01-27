@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+  <div class="panel-heading sortable-handle">
+    <h4 class="panel-title" ng-click="select()">{{ngModel.text}}</h4>
+  </div>
+  <div class="panel-body" ng-switch="editable">
+
+    <!-- Editable -->
+    <div class="row" ng-switch-when="true">
+    </div>
+
+    <!-- Not editable -->
+    <div class="row" ng-switch-default>
+
+      <!--
+      <a class="btn btn-primary" ui-sref="nestedView({nestedFormId: 2})">
+        <span class="glyphicon glyphicon-plus"></span> New
+      </a>
+      -->
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th ng-repeat="element in ngModel.elements">{{element.text}}</th>
+            <th>
+              <button class="btn btn-primary btn-xs">
+                <span class="glyphicon glyphicon-plus"></span> New
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in ngModel.value">
+            <td ng-repeat="element in ngModel.elements">{{row[element.name]}}</td>
+            <td>
+              <button class="btn btn-default btn-xs">
+                Details
+              </button>
+              <button class="btn btn-link btn-xs">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
