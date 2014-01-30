@@ -3,50 +3,48 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
 .provider('fobuConfig', function() {
   this.initializeDefaultStates = function($stateProvider, states) {
     states = states || [];
-    for (var i = 0; i < states.length; i++) {
-      if (states[i] === 'view') {
-        $stateProvider.state('view', {
-          abstract: true,
-          views: {
-            'main': {
-              controller: 'FobuViewCtrl',
-              template: '<ui-view />'
-            }
+    if (inArray(states, 'edit')) {
+      $stateProvider.state('edit', {
+        url: '/{formId}/edit',
+        views: {
+          'main': {
+            controller: 'FobuEditCtrl',
+            templateUrl: 'fobu/edit/edit.tpl.html'
           }
-        }).state('view.main', {
-          url: '/{formId}',
-          controller: 'FobuViewCtrl',
-          templateUrl: 'fobu/view/view.tpl.html'
-        }).state('view.nested', {
-          url: '/{formId}/{nestedFormId}/{row}',
-          controller: 'FobuViewCtrl',
-          templateUrl: 'fobu/view/view.tpl.html'
-        }).state('view.nestedNew', {
-          url: '/{formId}/{nestedFormId}',
-          controller: 'FobuViewCtrl',
-          templateUrl: 'fobu/view/view.tpl.html'
-        });
-      }
+        }
+      }).state('new', {
+        url: '/edit',
+        views: {
+          'main': {
+            controller: 'FobuEditCtrl',
+            templateUrl: 'fobu/edit/edit.tpl.html'
+          }
+        }
+      });
+    }
 
-      if (states[i] === 'edit') {
-        $stateProvider.state('edit', {
-          url: '/{formId}/edit',
-          views: {
-            'main': {
-              controller: 'FobuEditCtrl',
-              templateUrl: 'fobu/edit/edit.tpl.html'
-            }
+    if (inArray(states, 'view')) {
+      $stateProvider.state('view', {
+        abstract: true,
+        views: {
+          'main': {
+            controller: 'FobuViewCtrl',
+            template: '<ui-view />'
           }
-        }).state('new', {
-          url: '/edit',
-          views: {
-            'main': {
-              controller: 'FobuEditCtrl',
-              templateUrl: 'fobu/edit/edit.tpl.html'
-            }
-          }
-        });
-      }
+        }
+      }).state('view.main', {
+        url: '/{formId}',
+        controller: 'FobuViewCtrl',
+        templateUrl: 'fobu/view/view.tpl.html'
+      }).state('view.nested', {
+        url: '/{formId}/{nestedFormId}/{row}',
+        controller: 'FobuViewCtrl',
+        templateUrl: 'fobu/view/view.tpl.html'
+      }).state('view.nestedNew', {
+        url: '/{formId}/{nestedFormId}',
+        controller: 'FobuViewCtrl',
+        templateUrl: 'fobu/view/view.tpl.html'
+      });
     }
   };
 
@@ -254,6 +252,13 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
 
     return config;
   };
+
+  function inArray(array, value) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === value) { return true; }
+    }
+    return false;
+  }
 })
 
 ;
