@@ -48,12 +48,7 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
     }
   };
 
-  this.setDataProvider = function(dataProviderFn) {
-    this.dataProviderFn = dataProviderFn;
-  };
-
   this.$get = function(elementTransformer) {
-    var dataProviderFn = this.dataProviderFn;
     var config = {
       types: [{
         text: 'Checkboxes',
@@ -244,7 +239,11 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
       },
 
       getDataProvider: function() {
-        return dataProviderFn;
+        return this.dataProviderFn;
+      },
+
+      setDataProvider: function(dataProviderFn) {
+        this.dataProviderFn = dataProviderFn;
       }
     };
 

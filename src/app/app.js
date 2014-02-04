@@ -7,7 +7,9 @@ angular.module('app', [
 
 .config(function($stateProvider, fobuConfigProvider) {
   fobuConfigProvider.initializeDefaultStates($stateProvider, ['view', 'edit']);
+})
 
+.run(function(fobuConfig) {
   var data = {
     'nombre': 'Eduardo',
     'subencuesta-basica': [{
@@ -20,7 +22,7 @@ angular.module('app', [
       'edad': '20'
     }]
   };
-  fobuConfigProvider.setDataProvider(function(form, $stateParams) {
+  fobuConfig.setDataProvider(function(form, $stateParams) {
     if ($stateParams.nestedFormId && $stateParams.row === undefined) {
       form.fill({});
     } else if ($stateParams.nestedFormId) {
