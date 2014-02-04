@@ -5,6 +5,7 @@ angular.module('fobu.view', [
   'fobu.resources.form',
   'fobu.services.elementTransformer',
   'fobu.directives.formElementRenderer',
+  'fobu.directives.sanitization',
   'fobu.filters.inColumn'
 ])
 

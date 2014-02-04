@@ -8,6 +8,7 @@ angular.module('fobu.edit', [
   'fobu.directives.draggable',
   'fobu.directives.sortable',
   'fobu.directives.tab',
+  'fobu.directives.sanitization',
   'fobu.filters.inColumn',
   'ngAnimate'
 ])

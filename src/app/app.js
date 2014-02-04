@@ -13,11 +13,11 @@ angular.module('app', [
     'subencuesta-basica': [{
       'nombre': 'Eduardo',
       'apellido': 'Grajeda',
-      'edad': 26
+      'edad': '26'
     }, {
       'nombre': 'Luis',
       'apellido': 'Grajeda',
-      'edad': 20
+      'edad': '20'
     }]
   };
   fobuConfigProvider.setDataProvider(function(form, $stateParams) {
