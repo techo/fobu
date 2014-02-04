@@ -15,7 +15,11 @@ angular.module('fobu.services.elementTransformer', [])
       }
 
       var index = config.typeStringToIndex[element.type];
-      var type  = config.types[index];
+      if (! index) {
+        return element;
+      }
+
+      var type = config.types[index];
 
       element.classes = type.classes ? type.classes.split(' ') : [];
       element.controller  = element.controller || type.controller;
