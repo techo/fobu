@@ -4,12 +4,11 @@ angular.module('fobu.view', [
   'fobu.templates-common',
   'fobu.resources.form',
   'fobu.services.elementTransformer',
-  'fobu.services.elementFiller',
   'fobu.directives.formElementRenderer',
   'fobu.filters.inColumn'
 ])
 
-.controller('FobuViewCtrl', function($scope, $stateParams, Form, fobuConfig, elementTransformer, elementFiller) {
+.controller('FobuViewCtrl', function($scope, $stateParams, Form, fobuConfig, elementTransformer) {
   if (! $stateParams.formId) {
     return;
   }
@@ -24,13 +23,15 @@ angular.module('fobu.view', [
       if (nestedFormElement) {
         $scope.form = Form.get({ formId: nestedFormElement.formId }, function() {
           $scope.form = elementTransformer.transformRecursively($scope.form, fobuConfig);
-          elementFiller.fill($scope.form, fobuConfig.getDataProvider(), [nestedFormElement, $stateParams.row]);
+          $scope.form.nestedName = nestedFormElement.name;
+
+          fobuConfig.getDataProvider().apply(this, [$scope.form, $stateParams]);
         });
       }
     });
   } else {
     $scope.form.$promise.then(function() {
-      elementFiller.fill($scope.form, fobuConfig.getDataProvider());
+      fobuConfig.getDataProvider().apply(this, [$scope.form, $stateParams]);
     });
   }
 
