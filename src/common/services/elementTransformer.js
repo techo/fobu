@@ -15,7 +15,7 @@ angular.module('fobu.services.elementTransformer', [])
       }
 
       var index = config.typeStringToIndex[element.type];
-      if (! index) {
+      if (index === undefined) {
         return element;
       }
 
