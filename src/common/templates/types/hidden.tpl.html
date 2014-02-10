@@ -1,0 +1,7 @@
+<div class="form-group text-muted" ng-click="select()">
+  <label ng-if="editable">
+    <span class="fa fa-eye-slash"></span>
+    {{ngModel.name}}
+  </label>
+  <input type="hidden" name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value">
+</div>

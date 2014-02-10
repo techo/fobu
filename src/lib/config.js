@@ -174,6 +174,11 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
           };
         }
       }, {
+        text: 'Hidden',
+        icon: 'fa fa-meh-o',
+        type: 'hidden',
+        templateUrl: 'fobu/templates/types/hidden.tpl.html'
+      }, {
         text: 'Form',
         icon: 'fa fa-meh-o',
         type: 'nested-form',
@@ -232,7 +237,7 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
       typeStringToIndex: {},
 
       enabledTypes: [
-        'text', 'textarea', 'date', 'number', 'checkbox', 'radio', 'select', 'fieldset', 'resource'
+        'text', 'textarea', 'date', 'number', 'checkbox', 'radio', 'select', 'fieldset', 'hidden', 'resource'
       ],
 
       // It's populated in the config.initialize() method.
