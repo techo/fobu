@@ -19,12 +19,14 @@ angular.module('fobu.view', [
     $scope.form = form;
   });
 
-  $scope.$on('$stateChangeStart', function(e, toState, toParams) {
-    toParams.form = $scope.form;
+  $scope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
+    toParams[fromParams.nestedFormId ? 'nestedForm' : 'form'] = $scope.form;
   });
 
   function loadForm($stateParams, fobuConfig, callbackFn) {
-    if ($stateParams.form) {
+    if ($stateParams.nestedFormId && $stateParams.nestedForm) {
+      return callbackFn($stateParams.nestedForm);
+    } else if (! $stateParams.nestedFormId && $stateParams.form) {
       return callbackFn($stateParams.form);
     }
 
