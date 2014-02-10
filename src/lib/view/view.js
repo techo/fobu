@@ -2,6 +2,7 @@ angular.module('fobu.view', [
   'fobu.config',
   'fobu.templates-app',
   'fobu.templates-common',
+  'fobu.view.search',
   'fobu.resources.form',
   'fobu.services.elementTransformer',
   'fobu.directives.formElementRenderer',
@@ -14,26 +15,42 @@ angular.module('fobu.view', [
     return;
   }
 
-  $scope.form = Form.get({ formId: $stateParams.formId }, function() {
-    $scope.form = elementTransformer.transformRecursively($scope.form, fobuConfig);
+  loadForm($stateParams, fobuConfig, function(form) {
+    $scope.form = form;
   });
 
-  if ($stateParams.nestedFormId) {
-    $scope.form.$promise.then(function() {
-      var nestedFormElement = findElementById($scope.form.elements, $stateParams.nestedFormId);
-      if (nestedFormElement) {
-        $scope.form = Form.get({ formId: nestedFormElement.formId }, function() {
-          $scope.form = elementTransformer.transformRecursively($scope.form, fobuConfig);
-          $scope.form.nestedName = nestedFormElement.name;
+  $scope.$on('$stateChangeStart', function(e, toState, toParams) {
+    toParams.form = $scope.form;
+  });
 
-          fobuConfig.getDataProvider().apply(this, [$scope.form, $stateParams]);
-        });
-      }
+  function loadForm($stateParams, fobuConfig, callbackFn) {
+    if ($stateParams.form) {
+      return callbackFn($stateParams.form);
+    }
+
+    var form = Form.get({ formId: $stateParams.formId }, function() {
+      form = elementTransformer.transformRecursively(form, fobuConfig);
     });
-  } else {
-    $scope.form.$promise.then(function() {
-      fobuConfig.getDataProvider().apply(this, [$scope.form, $stateParams]);
-    });
+
+    if ($stateParams.nestedFormId) {
+      form.$promise.then(function() {
+        var nestedFormElement = findElementById(form.elements, $stateParams.nestedFormId);
+        if (nestedFormElement) {
+          form = Form.get({ formId: nestedFormElement.formId }, function() {
+            form = elementTransformer.transformRecursively(form, fobuConfig);
+            form.nestedName = nestedFormElement.name;
+
+            callbackFn(form);
+            fobuConfig.getDataProvider().apply(this, [form, $stateParams]);
+          });
+        }
+      });
+    } else {
+      form.$promise.then(function() {
+        callbackFn(form);
+        fobuConfig.getDataProvider().apply(this, [form, $stateParams]);
+      });
+    }
   }
 
   function findElementById(elements, id) {
