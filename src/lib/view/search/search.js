@@ -15,13 +15,11 @@ angular.module('fobu.view.search', [
   $scope.select = function(resource) {
     var element = findResourceElementById($stateParams.form, $stateParams.elementId);
 
-    var value = resource.toString();
-    if (! resource.hasOwnProperty("toString")) {
-      value = resource[$scope.results.headers[0].name];
-    }
-
     var data = {};
-    data[element.name] = value;
+    data[element.name] = {
+      uri: resource.uri,
+      text: resource.text || resource[$scope.results.headers[0].name]
+    };
     $stateParams.form.fill(data);
 
     $state.go($state.$previous);

@@ -1,7 +1,8 @@
 <div class="form-group" ng-click="select()">
   <label for="">{{ngModel.text}}</label>
+  <input type="hidden" name="{{ngModel.name}}-uri" ng-model="ngModel.value.uri">
   <div class="input-group">
-    <input type="text" name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value" ng-readonly="readonly">
+    <input type="text" name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value.text" ng-readonly="readonly">
     <span class="input-group-btn">
       <button class="btn btn-default" type="button" ui-sref="view.search({ elementId: ngModel.id })">
         <span class="glyphicon glyphicon-search"></span>
