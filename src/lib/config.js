@@ -35,16 +35,28 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
       }).state('view.main', {
         url: '/{formId}',
         controller: 'FobuViewCtrl',
-        templateUrl: 'fobu/view/view.tpl.html'
+        templateUrl: 'fobu/view/view.tpl.html',
+        onEnter: onEnterGlobal
+      }).state('view.search', {
+        url: '/{formId}/search/{elementId}',
+        controller: 'FobuViewSearchCtrl',
+        templateUrl: 'fobu/view/search/search.tpl.html',
+        onEnter: onEnterGlobal
       }).state('view.nested', {
         url: '/{formId}/{nestedFormId}/{row}',
         controller: 'FobuViewCtrl',
-        templateUrl: 'fobu/view/view.tpl.html'
+        templateUrl: 'fobu/view/view.tpl.html',
+        onEnter: onEnterGlobal
       }).state('view.nestedNew', {
         url: '/{formId}/{nestedFormId}',
         controller: 'FobuViewCtrl',
-        templateUrl: 'fobu/view/view.tpl.html'
+        templateUrl: 'fobu/view/view.tpl.html',
+        onEnter: onEnterGlobal
       });
+    }
+
+    function onEnterGlobal($state) {
+      $state.$previous = $state.$current;
     }
   };
 
@@ -175,6 +187,11 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
           'horizontal': 'fobu/templates/types/fieldset/horizontal_input.tpl.html'
         }
       }, {
+        text: 'Resource',
+        icon: 'fa fa-globe',
+        type: 'resource',
+        templateUrl: 'fobu/templates/types/resource.tpl.html'
+      }, {
         text: 'Dropdown',
         icon: 'fa fa-list-alt',
         type: 'select',
@@ -215,7 +232,7 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
       typeStringToIndex: {},
 
       enabledTypes: [
-        'text', 'textarea', 'date', 'number', 'checkbox', 'radio', 'select', 'fieldset', 'column-break'
+        'text', 'textarea', 'date', 'number', 'checkbox', 'radio', 'select', 'fieldset', 'resource'
       ],
 
       // It's populated in the config.initialize() method.

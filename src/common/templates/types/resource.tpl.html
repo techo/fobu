@@ -1,0 +1,12 @@
+<div class="form-group" ng-click="select()">
+  <label for="">{{ngModel.text}}</label>
+  <div class="input-group">
+    <input type="text" name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value" ng-readonly="readonly">
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button" ui-sref="view.search({ elementId: ngModel.id })">
+        <span class="glyphicon glyphicon-search"></span>
+      </button>
+    </span>
+  </div>
+  <span class="help-block">{{ngModel.help}}</span>
+</div>
