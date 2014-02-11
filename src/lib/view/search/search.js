@@ -4,17 +4,17 @@ angular.module('fobu.view.search', [
 ])
 
 .controller('FobuViewSearchCtrl', function($scope, $stateParams, $http, $state) {
+  var element = findResourceElement(
+    $stateParams.form, $stateParams.elementId, $stateParams.elementType
+  );
+
   $scope.search = function() {
-    $http.get('http://localhost:3000/api/resources', {
-      params: { q: $scope.query }
-    }).success(function(data) {
-      $scope.results = data;
+    element.search($scope.query).success(function(results) {
+      $scope.results = results;
     });
   };
 
   $scope.select = function(resource) {
-    var element = findResourceElementById($stateParams.form, $stateParams.elementId);
-
     var data = {};
     data[element.name] = {
       uri: resource.uri,
@@ -25,23 +25,23 @@ angular.module('fobu.view.search', [
     $state.go($state.$previous);
   };
 
+  // TODO: Improve on this to consider nested forms
   $scope.$on('$stateChangeStart', function(e, toState, toParams) {
     toParams.form = $stateParams.form;
   });
 
-  // TODO: Abstract this with the one at view.js?
-  function findResourceElementById(element, id) {
+  function findResourceElement(element, id, type) {
     if (! element) {
       return;
     }
 
-    if (element.type === 'resource' && element.id == id) {
+    if (element.type === type && element.id == id) {
       return element;
     }
 
     var elements = element.elements || [];
     for (var i = 0; i < elements.length; i++) {
-      element = findResourceElementById(elements[i], id);
+      element = findResourceElement(elements[i], id, type);
       if (element) {
         return element;
       }

@@ -38,7 +38,7 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
         templateUrl: 'fobu/view/view.tpl.html',
         onEnter: onEnterGlobal
       }).state('view.search', {
-        url: '/{formId}/search/{elementId}',
+        url: '/{formId}/search/{elementType}/{elementId}',
         controller: 'FobuViewSearchCtrl',
         templateUrl: 'fobu/view/search/search.tpl.html',
         onEnter: onEnterGlobal
@@ -237,7 +237,7 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
       typeStringToIndex: {},
 
       enabledTypes: [
-        'text', 'textarea', 'date', 'number', 'checkbox', 'radio', 'select', 'fieldset', 'hidden', 'resource'
+        'text', 'textarea', 'date', 'number', 'checkbox', 'radio', 'select', 'fieldset', 'hidden'
       ],
 
       // It's populated in the config.initialize() method.

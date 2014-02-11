@@ -4,7 +4,7 @@
   <div class="input-group">
     <input type="text" name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value.text" ng-readonly="readonly">
     <span class="input-group-btn">
-      <button class="btn btn-default" type="button" ui-sref="view.search({ elementId: ngModel.id })">
+      <button class="btn btn-default" type="button" ui-sref="view.search({ elementId: ngModel.id, elementType: ngModel.type })">
         <span class="glyphicon glyphicon-search"></span>
       </button>
     </span>
