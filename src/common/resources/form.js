@@ -5,7 +5,7 @@ angular.module('fobu.resources.form', [
 ])
 
 .factory('Form', function($resource, $http, fobuConfig, elementTransformer) {
-  var Form = $resource(fobuConfig.uri.form, { formId: '@formId', answersId: '@answersId' }, {
+  var Form = $resource(fobuConfig.formUrl, { formId: '@formId' }, {
     save: {
       method: 'POST',
       transformRequest: [function(data, headers) {
