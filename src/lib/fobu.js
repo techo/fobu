@@ -7,13 +7,4 @@ angular.module('fobu', [
   'fobu.resources.form'
 ])
 
-.factory('fobu', function(fobuConfig) {
-  return {
-    config: function(fn) {
-      fn(fobuConfig);
-      fobuConfig.initialize();
-    }
-  };
-})
-
 ;
