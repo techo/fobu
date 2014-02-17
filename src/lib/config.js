@@ -55,9 +55,9 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
       });
     }
 
-    function onEnterGlobal($state) {
+    var onEnterGlobal = ['$state', function($state) {
       $state.$previous = $state.$current;
-    }
+    }];
   };
 
   this.$get = function(elementTransformer) {
