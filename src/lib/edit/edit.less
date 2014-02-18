@@ -109,8 +109,15 @@ a {
   }
 
   .ui-sortable-placeholder {
-    &:extend(.alert);
-    &:extend(.alert-warning);
+    /**
+     * Copy-paste from Bootstrap's .alert, they don't have a mixin for this.
+     */
+    padding: @alert-padding;
+    margin-bottom: @line-height-computed;
+    border: 1px solid transparent;
+    border-radius: @alert-border-radius;
+    .alert-variant(@alert-warning-bg; @alert-warning-border; @alert-warning-text);
+
     visibility: inherit !important;
     position: relative;
     height: 75px;

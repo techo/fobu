@@ -109,6 +109,16 @@ module.exports = function ( grunt ) {
           }
        ]   
       },
+      build_app_fonts: {
+        files: [
+          { 
+            src: [ '**' ],
+            dest: '<%= build_dir %>/fonts/',
+            cwd: 'src/assets/fonts',
+            expand: true
+          }
+       ]   
+      },
       build_vendor_assets: {
         files: [
           { 
@@ -488,7 +498,7 @@ module.exports = function ( grunt ) {
         files: [
           'src/assets/**/*'
         ],
-        tasks: [ 'copy:build_app_assets' ]
+        tasks: [ 'copy:build_app_assets', 'copy:build_app_fonts' ]
       },
 
       /**
@@ -556,8 +566,8 @@ module.exports = function ( grunt ) {
    */
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'less:build', 'concat:build_css',
-    'copy:build_app_assets', 'copy:build_vendor_assets', 'copy:build_libjs',
-    'copy:build_vendorjs'
+    'copy:build_app_assets', 'copy:build_app_fonts', 'copy:build_vendor_assets',
+    'copy:build_libjs', 'copy:build_vendorjs'
   ]);
 
   /**
