@@ -13,7 +13,7 @@ angular.module('fobu.edit', [
   'ngAnimate'
 ])
 
-.controller('FobuEditCtrl', function($scope, $stateParams, $window, Form, fobuConfig, elementTransformer) {
+.controller('FobuEditCtrl', function($scope, $state, $stateParams, $window, Form, fobuConfig, elementTransformer) {
   $scope.fobuConfig = fobuConfig;
 
   if ($stateParams.formId) {
@@ -37,6 +37,10 @@ angular.module('fobu.edit', [
     });
     $scope.form = elementTransformer.transformRecursively($scope.form, fobuConfig);
   }
+
+  $scope.create = function() {
+    $window.open($state.href('new'));
+  };
 
   $scope.save = function() {
     $scope.form.$save(function() {
