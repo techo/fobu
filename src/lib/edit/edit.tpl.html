@@ -10,7 +10,7 @@
         </button>
         <ul class="dropdown-menu" role="menu">
           <li><a ui-sref="new">New</a></li>
-          <li><a href="#">Clone...</a></li>
+          <li><a data-toggle="modal" data-target="#copyModal">Make a copy...</a></li>
         </ul>
       </div>
       <ul class="nav nav-tabs">
@@ -111,5 +111,26 @@
 
     <div form-element-renderer editable ng-model="form" class="editable"></div>
 
+  </div>
+</div>
+
+<div class="modal fade" id="copyModal" ng-controller='FobuEditCopyCtrl'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Copy form</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="newFormName">New form name</label>
+          <input type="text" class="form-control" id="newFormName" ng-model="text">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <a class="btn btn-primary" data-dismiss="modal" ng-click="copy()">OK</a>
+      </div>
+    </div>
   </div>
 </div>

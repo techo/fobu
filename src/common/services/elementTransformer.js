@@ -49,18 +49,26 @@ angular.module('fobu.services.elementTransformer', [])
       return element;
     },
 
-    reverseTransform: function(element) {
+    reverseTransform: function(element, properties) {
+      properties = properties || [];
+
+      for (var i = 0; i < properties.length; i++) {
+        delete element[properties[i]];
+      }
+
       return element;
     },
 
-    reverseTransformRecursively: function(element) {
-      this.reverseTransform(element);
+    reverseTransformRecursively: function(element, properties) {
+      properties = properties || [];
+
+      this.reverseTransform(element, properties);
 
       if (! element.elements) {
         return element;
       }
       for (var i = 0; i < element.elements.length; i++) {
-        this.reverseTransformRecursively(element.elements[i]);
+        this.reverseTransformRecursively(element.elements[i], properties);
       }
 
       return element;

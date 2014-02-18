@@ -13,7 +13,7 @@ angular.module('fobu.edit', [
   'ngAnimate'
 ])
 
-.controller('FobuEditCtrl', function($scope, $stateParams, Form, fobuConfig, elementTransformer) {
+.controller('FobuEditCtrl', function($scope, $stateParams, $window, Form, fobuConfig, elementTransformer) {
   $scope.fobuConfig = fobuConfig;
 
   if ($stateParams.formId) {
@@ -21,7 +21,7 @@ angular.module('fobu.edit', [
       $scope.form = elementTransformer.transformRecursively($scope.form, fobuConfig);
     });
   } else {
-    $scope.form = new Form({
+    $scope.form = new Form($window.form || {
       text: 'Untitled form',
       type: 'form',
       elements: [{
@@ -111,6 +111,22 @@ angular.module('fobu.edit', [
     $scope.selection = element;
     $scope.selection.classes.push('selected');
   }
+})
+
+.controller('FobuEditCopyCtrl', function($scope, $state, $window, elementTransformer) {
+  $scope.$watch('form.text', function() {
+    $scope.text = 'Copy of ' + $scope.form.text;
+  });
+
+  $scope.copy = function() {
+    var copiedForm = elementTransformer.reverseTransformRecursively(
+      angular.copy($scope.form), ['id']
+    );
+    copiedForm.text = $scope.text;
+
+    $window.open($state.href('new'))
+      .form = copiedForm;
+  };
 })
 
 .directive('properties', function() {
