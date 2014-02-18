@@ -3,7 +3,7 @@ angular.module('fobu.view.search', [
   'fobu.templates-common'
 ])
 
-.controller('FobuViewSearchCtrl', function($scope, $stateParams, $http, $state) {
+.controller('FobuViewSearchCtrl', function($scope, $state, $stateParams, $http) {
   var element = findResourceElement(
     $stateParams.form, $stateParams.elementId, $stateParams.elementType
   );
