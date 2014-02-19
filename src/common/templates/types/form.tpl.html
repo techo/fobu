@@ -6,7 +6,7 @@
     <div class="alert alert-info text-center stop-sorting">
       <a class="alert-link" ng-click="stopSorting()">I am done sorting</a>
     </div>
-    <div sortable handle=".sortable-handle" ng-model="ngModel.elements">
+    <div sortable handle=".sortable-handle" ng-model="ngModel.elements" class="ui-form-sortable">
       <div form-element-renderer editable ng-repeat="element in ngModel.elements" ng-model="element"></div>
     </div>
   </div>
