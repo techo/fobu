@@ -1,4 +1,7 @@
-<h2 ng-click="select()">{{ngModel.text}}</h2>
+<h2 ng-click="select()">
+  {{ngModel.text}}
+  <span class="fa fa-gears has-javascript" title="This element has custom Javascript code." ng-show="ngModel.javascript"></span>
+</h2>
 <div ng-switch="editable">
 
   <!-- Editable -->

@@ -1,5 +1,8 @@
 <div class="form-group" ng-click="select()">
-  <label for="">{{ngModel.text}}</label>
+  <label for="">
+    {{ngModel.text}}
+    <span class="fa fa-gears has-javascript" title="This element has custom Javascript code." ng-show="ngModel.javascript"></span>
+  </label>
   <div class="{{ngModel.type}}" ng-repeat="element in ngModel.elements" ng-switch="ngModel.type">
     <label ng-switch-when="checkbox">
       <input type="checkbox" name="{{ngModel.name}}" value="{{element.name}}" ng-checked="ngModel.value.indexOf(element.name) > -1" ng-click="check(element.name)" ng-disabled="readonly"> {{element.text}}

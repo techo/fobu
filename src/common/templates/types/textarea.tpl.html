@@ -1,5 +1,8 @@
 <div class="form-group" ng-click="select()">
-  <label for="">{{ngModel.text}}</label>
+  <label for="">
+    {{ngModel.text}}
+    <span class="fa fa-gears has-javascript" title="This element has custom Javascript code." ng-show="ngModel.javascript"></span>
+  </label>
   <textarea name="{{ngModel.name}}" class="form-control" rows="3" ng-model="ngModel.value" ng-readonly="readonly"></textarea>
   <span class="help-block">{{ngModel.help}}</span>
 </div>

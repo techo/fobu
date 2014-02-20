@@ -1,6 +1,9 @@
 <div class="panel panel-default">
   <div class="panel-heading sortable-handle">
-    <h4 class="panel-title" ng-click="select()">{{ngModel.text}}</h4>
+    <h4 class="panel-title" ng-click="select()">
+      {{ngModel.text}}
+      <span class="fa fa-gears has-javascript" title="This element has custom Javascript code." ng-show="ngModel.javascript"></span>
+    </h4>
   </div>
   <div class="panel-body" ng-switch="editable">
 
