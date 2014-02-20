@@ -24,6 +24,10 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
     }
 
     if (inArray(states, 'view')) {
+      var onEnterGlobal = ['$state', function($state) {
+        $state.$previous = $state.$current;
+      }];
+
       $stateProvider.state('view', {
         abstract: true,
         views: {
@@ -54,10 +58,6 @@ angular.module('fobu.config', ['fobu.services.elementTransformer'])
         onEnter: onEnterGlobal
       });
     }
-
-    var onEnterGlobal = ['$state', function($state) {
-      $state.$previous = $state.$current;
-    }];
   };
 
   this.$get = function(elementTransformer) {
