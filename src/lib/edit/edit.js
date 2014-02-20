@@ -10,7 +10,8 @@ angular.module('fobu.edit', [
   'fobu.directives.tab',
   'fobu.directives.sanitization',
   'fobu.filters.inColumn',
-  'ngAnimate'
+  'ngAnimate',
+  'ui.ace'
 ])
 
 .controller('FobuEditCtrl', function($scope, $state, $stateParams, $window, Form, fobuConfig, elementTransformer) {

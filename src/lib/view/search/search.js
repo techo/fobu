@@ -22,6 +22,8 @@ angular.module('fobu.view.search', [
     };
     $stateParams.form.fill(data);
 
+    element.emit('resource.select', data);
+
     $state.go($state.$previous);
   };
 
