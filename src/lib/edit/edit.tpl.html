@@ -33,65 +33,95 @@
         </div>
 
         <div class="fe-properties tab-pane active" id="properties" properties>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="">Text</label>
-                <textarea class="form-control input-sm" rows="2" ng-model="selection.text"></textarea>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="">Help</label>
-                <input type="text" class="form-control input-sm" ng-model="selection.help">
-              </div>
-            </div>
-          </div>
 
-          <div class="row" ng-show="type.properties">
-            <div class="col-md-12">
-              <table class="table table-condensed">
-                <tbody>
-                  <tr ng-repeat="property in type.properties" ng-switch="property.type">
-                    <td>
-                      <label for="">{{property.text}}</label>
-                    </td>
-                    <td ng-switch-when="checkbox">
-                      <input type="checkbox" value="">
-                    </td>
-                    <td ng-switch-when="select">
-                      <select class="form-control input-sm" ng-model="selection[property.name]" ng-options="e.value as e.text for e in property.elements" ng-change='property.change(selection)'></select>
-                    </td>
-                    <td ng-switch-default></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <div class="panel-group" style="margin-bottom: 15px;">
+            <div class="panel panel-default">
+              <div class="panel-body">
 
-          <div class="fe-options" ng-show="selection.elements && selection.type !== 'fieldset' && selection.type !== 'form'">
-            <div class="row">
-              <div class="col-md-12">
-                <label>Options</label>
-              </div>
-            </div>
-            <div sortable ng-model="selection.elements">
-              <div class="row" ng-repeat="element in selection.elements">
-                <div class="col-md-12">
-                  <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" ng-model="element.text">
-                    <div class="input-group-btn">
-                      <button type="button" class="btn btn-default" tabindex="-1" ng-click="addElement($index)">
-                        <span class="fa fa-plus"></span>
-                      </button>
-                      <button type="button" class="btn btn-default" tabindex="-1" ng-click="removeElement($index)">
-                        <span class="fa fa-minus"></span>
-                      </button>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="">Text</label>
+                      <textarea class="form-control input-sm" rows="2" ng-model="selection.text"></textarea>
                     </div>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="">Help</label>
+                      <input type="text" class="form-control input-sm" ng-model="selection.help">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" ng-show="type.properties">
+                  <div class="col-md-12">
+                    <table class="table table-condensed">
+                      <tbody>
+                        <tr ng-repeat="property in type.properties" ng-switch="property.type">
+                          <td>
+                            <label for="">{{property.text}}</label>
+                          </td>
+                          <td ng-switch-when="checkbox">
+                            <input type="checkbox" value="">
+                          </td>
+                          <td ng-switch-when="select">
+                            <select class="form-control input-sm" ng-model="selection[property.name]" ng-options="e.value as e.text for e in property.elements" ng-change='property.change(selection)'></select>
+                          </td>
+                          <td ng-switch-default></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="fe-options" ng-show="selection.elements && selection.type !== 'fieldset' && selection.type !== 'form'">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label>Options</label>
+                    </div>
+                  </div>
+                  <div sortable ng-model="selection.elements">
+                    <div class="row" ng-repeat="element in selection.elements">
+                      <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                          <input type="text" class="form-control" ng-model="element.text">
+                          <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" tabindex="-1" ng-click="addElement($index)">
+                              <span class="fa fa-plus"></span>
+                            </button>
+                            <button type="button" class="btn btn-default" tabindex="-1" ng-click="removeElement($index)">
+                              <span class="fa fa-minus"></span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a>
+                    Advanced Settings
+                  </a>
+                </h4>
+              </div>
+              <div class="panel-body">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="">Javascript</label>
+                      <div ui-ace="{ mode: 'javascript' }" class="form-control" ng-model="selection.javascript"></div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>

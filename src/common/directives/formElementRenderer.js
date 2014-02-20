@@ -1,6 +1,8 @@
-angular.module('fobu.directives.formElementRenderer', [])
+angular.module('fobu.directives.formElementRenderer', [
+  'fobu.services.javascriptEvaluator'
+])
 
-.directive('formElementRenderer', function() {
+.directive('formElementRenderer', function(javascriptEvaluator) {
   return {
     require: '?ngModel',
     scope: {
@@ -34,6 +36,8 @@ angular.module('fobu.directives.formElementRenderer', [])
           controller($scope, $element, $attrs);
         }
       });
+
+      javascriptEvaluator.evaluate($scope, $scope.ngModel);
     },
     link: function(scope, element, attrs) {
       scope.editable = 'editable' in attrs;
