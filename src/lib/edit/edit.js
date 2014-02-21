@@ -45,8 +45,10 @@ angular.module('fobu.edit', [
 
   $scope.save = function() {
     $scope.form.$save(function() {
-      $scope.form  = elementTransformer.transformRecursively($scope.form, fobuConfig);
-      $state.go('edit', { formId: $scope.form.id });
+      $scope.form = elementTransformer.transformRecursively($scope.form, fobuConfig);
+      if ($state.is('new')) {
+        $state.go('edit', { formId: $scope.form.id });
+      }
     });
   };
 
