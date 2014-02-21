@@ -113,11 +113,11 @@ angular.module('fobu.edit', [
 
   function select(element) {
     if ($scope.selection) {
-      $scope.selection.classes.splice($scope.selection.classes.indexOf('selected'), 1);
+      $scope.selection.selected = false;
     }
 
     $scope.selection = element;
-    $scope.selection.classes.push('selected');
+    $scope.selection.selected = true;
   }
 })
 
