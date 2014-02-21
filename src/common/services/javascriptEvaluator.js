@@ -15,6 +15,16 @@ angular.module('fobu.services.javascriptEvaluator', [])
         element.value = value;
       };
 
+      element.enable = function(enable) {
+        enable = enable === undefined ? true : enable;
+        element.disabled = ! enable;
+      };
+
+      element.show = function(show) {
+        show = show === undefined ? true : show;
+        element.hidden = ! show;
+      };
+
       /* jshint -W061 */
       eval(element.javascript);
 

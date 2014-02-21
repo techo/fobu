@@ -4,9 +4,9 @@
     <span class="fa fa-gears has-javascript" title="This element has custom Javascript code." ng-show="ngModel.javascript"></span>
   </label>
   <input type="hidden" name="{{ngModel.name}}-uri" ng-model="ngModel.value.uri">
-  <div class="input-group">
-    <input type="text" name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value.text" ng-readonly="readonly">
-    <span class="input-group-btn">
+  <div ng-class="{ 'input-group': ! ngModel.disabled }">
+    <input type="text" name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value.text" ng-readonly="readonly" ng-disabled="ngModel.disabled">
+    <span class="input-group-btn" ng-hide="ngModel.disabled">
       <button class="btn btn-default" type="button" ui-sref="view.search({ elementId: ngModel.id, elementType: ngModel.type })">
         <span class="glyphicon glyphicon-search"></span>
       </button>

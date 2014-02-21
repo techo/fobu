@@ -9,7 +9,7 @@ angular.module('fobu.directives.formElementRenderer', [
       ngModel: '='
     },
     template: function(element, attrs) {
-      return '<div class="form-element form-element-{{ngModel.type}}" ng-class="ngModel.classes" ng-include="ngModel.templateUrl"></div>';
+      return '<div class="form-element form-element-{{ngModel.type}}" ng-class="ngModel.classes" ng-include="ngModel.templateUrl" ng-hide="ngModel.hidden"></div>';
     },
     controller: function($scope, $element, $attrs) {
       $scope.select = function() {
