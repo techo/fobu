@@ -37,7 +37,11 @@ angular.module('fobu.directives.formElementRenderer', [
         }
       });
 
-      javascriptEvaluator.evaluate($scope, $scope.ngModel);
+      $attrs.$observe('editable', function(editable) {
+        if (editable === undefined) {
+          javascriptEvaluator.evaluate($scope, $scope.ngModel);
+        }
+      });
     },
     link: function(scope, element, attrs) {
       scope.editable = 'editable' in attrs;
