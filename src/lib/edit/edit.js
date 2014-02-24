@@ -152,6 +152,9 @@ angular.module('fobu.edit', [
 
       $scope.removeElement = function(index) {
         $scope.selection.elements.splice(index, 1);
+        if ($scope.selection.elements.length === 0) {
+          $scope.selection.elements = [{ text: '' }];
+        }
       };
 
       $scope.$watch('selection.type', function(type) {
