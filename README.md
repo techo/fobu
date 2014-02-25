@@ -6,7 +6,7 @@ Quick Start
 
 Install Node.js:
 
-```
+```sh
 $ sudo apt-get update
 $ sudo apt-get install -y python-software-properties python g++ make
 $ sudo add-apt-repository -y ppa:chris-lea/node.js
@@ -16,14 +16,15 @@ $ sudo apt-get install nodejs
 
 Install the dependencies:
 
-```
+```sh
 $ npm install
+$ sudo npm -g install grunt-cli karma bower
 $ bower install
 ```
 
 Run it:
 
-```
+```sh
 $ grunt watch
 ```
 
@@ -32,7 +33,7 @@ Configuration
 
 The configuration file is located at `lib/config.js` and it has the following options:
 
-```
+```javascript
 var config = {
   // All the available types that can be used in a form.
   types: [ ... ],
@@ -49,7 +50,7 @@ etc.) that can be used in a form.
 
 For example, the `checkbox` type could be defined like this:
 
-```
+```javascript
 var config = {
   types: [{
     text: 'Checkboxes',
