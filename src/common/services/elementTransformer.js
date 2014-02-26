@@ -21,7 +21,6 @@ angular.module('fobu.services.elementTransformer', [])
 
       var type = config.types[index];
 
-      element.classes = type.classes ? type.classes.split(' ') : [];
       element.controller  = element.controller || type.controller;
       element.templateUrl = element.templateUrl || type.templateUrl;
       if (typeof element.templateUrl === 'object') {
@@ -50,7 +49,7 @@ angular.module('fobu.services.elementTransformer', [])
     },
 
     reverseTransform: function(element, properties) {
-      properties = properties || [];
+      properties = (properties || []).concat('selected');
 
       for (var i = 0; i < properties.length; i++) {
         delete element[properties[i]];
@@ -60,7 +59,7 @@ angular.module('fobu.services.elementTransformer', [])
     },
 
     reverseTransformRecursively: function(element, properties) {
-      properties = properties || [];
+      properties = (properties || []).concat('selected');
 
       this.reverseTransform(element, properties);
 

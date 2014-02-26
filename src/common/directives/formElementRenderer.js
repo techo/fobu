@@ -9,7 +9,7 @@ angular.module('fobu.directives.formElementRenderer', [
       ngModel: '='
     },
     template: function(element, attrs) {
-      return '<div class="form-element form-element-{{ngModel.type}}" ng-class="ngModel.classes" ng-include="ngModel.templateUrl"></div>';
+      return '<div class="form-element form-element-{{ngModel.type}}" ng-class="{ \'text-muted\': ngModel.disabled, \'selected\': ngModel.selected }" ng-include="ngModel.templateUrl" ng-hide="ngModel.hidden"></div>';
     },
     controller: function($scope, $element, $attrs) {
       $scope.select = function() {
@@ -37,7 +37,11 @@ angular.module('fobu.directives.formElementRenderer', [
         }
       });
 
-      javascriptEvaluator.evaluate($scope, $scope.ngModel);
+      $attrs.$observe('editable', function(editable) {
+        if (editable === undefined) {
+          javascriptEvaluator.evaluate($scope, $scope.ngModel);
+        }
+      });
     },
     link: function(scope, element, attrs) {
       scope.editable = 'editable' in attrs;

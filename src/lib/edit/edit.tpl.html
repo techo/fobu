@@ -34,9 +34,14 @@
 
         <div class="fe-properties tab-pane active" id="properties" properties>
 
-          <div class="panel-group" style="margin-bottom: 15px;">
+          <div class="panel-group" ng-init="visiblePanel = 'settings'">
             <div class="panel panel-default">
-              <div class="panel-body">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a ng-click="visiblePanel = 'settings'">Settings</a>
+                </h4>
+              </div>
+              <div class="panel-body" ng-show="visiblePanel === 'settings'">
 
                 <div class="row">
                   <div class="col-md-12">
@@ -106,12 +111,10 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h4 class="panel-title">
-                  <a>
-                    Advanced Settings
-                  </a>
+                  <a ng-click="visiblePanel = 'advancedSettings'">Advanced Settings</a>
                 </h4>
               </div>
-              <div class="panel-body">
+              <div class="panel-body" ng-show="visiblePanel === 'advancedSettings'">
 
                 <div class="row">
                   <div class="col-md-12">

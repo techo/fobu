@@ -3,6 +3,6 @@
     {{ngModel.text}}
     <span class="fa fa-gears has-javascript" title="This element has custom Javascript code." ng-show="ngModel.javascript"></span>
   </label>
-  <input type="{{ngModel.type}}" name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value" ng-readonly="readonly">
+  <input type="{{ngModel.type}}" name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value" ng-readonly="readonly" ng-disabled="ngModel.disabled">
   <span class="help-block">{{ngModel.help}}</span>
 </div>

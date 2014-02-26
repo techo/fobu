@@ -5,10 +5,10 @@
   </label>
   <div class="{{ngModel.type}}" ng-repeat="element in ngModel.elements" ng-switch="ngModel.type">
     <label ng-switch-when="checkbox">
-      <input type="checkbox" name="{{ngModel.name}}" value="{{element.name}}" ng-checked="ngModel.value.indexOf(element.name) > -1" ng-click="check(element.name)" ng-disabled="readonly"> {{element.text}}
+      <input type="checkbox" name="{{ngModel.name}}" value="{{element.name}}" ng-checked="ngModel.value.indexOf(element.name) > -1" ng-click="check(element.name)" ng-disabled="readonly || ngModel.disabled"> {{element.text}}
     </label>
     <label ng-switch-default>
-      <input type="{{ngModel.type}}" name="{{ngModel.name}}" value="{{element.name}}" ng-model="ngModel.value" ng-disabled="readonly"> {{element.text}}
+      <input type="{{ngModel.type}}" name="{{ngModel.name}}" value="{{element.name}}" ng-model="ngModel.value" ng-disabled="readonly || ngModel.disabled"> {{element.text}}
     </label>
   </div>
 </div>

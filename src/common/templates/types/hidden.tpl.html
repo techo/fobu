@@ -2,6 +2,7 @@
   <label ng-if="editable">
     <span class="fa fa-eye-slash"></span>
     {{ngModel.name}}
+    <span class="fa fa-gears has-javascript" title="This element has custom Javascript code." ng-show="ngModel.javascript"></span>
   </label>
-  <input type="hidden" name="{{ngModel.name}}" ng-model="ngModel.value">
+  <input type="hidden" name="{{ngModel.name}}" ng-model="ngModel.value" ng-disabled="ngModel.disabled">
 </div>

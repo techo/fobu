@@ -3,6 +3,6 @@
     {{ngModel.text}}
     <span class="fa fa-gears has-javascript" title="This element has custom Javascript code." ng-show="ngModel.javascript"></span>
   </label>
-  <select name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value" ng-options="e.name as e.text for e in ngModel.elements" ng-disabled="readonly"></select>
+  <select name="{{ngModel.name}}" class="form-control" ng-model="ngModel.value" ng-options="e.name as e.text for e in ngModel.elements" ng-disabled="readonly || ngModel.disabled"></select>
   <span class="help-block">{{ngModel.help}}</span>
 </div>

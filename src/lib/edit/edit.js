@@ -45,8 +45,10 @@ angular.module('fobu.edit', [
 
   $scope.save = function() {
     $scope.form.$save(function() {
-      $scope.form  = elementTransformer.transformRecursively($scope.form, fobuConfig);
-      $state.go('edit', { formId: $scope.form.id });
+      $scope.form = elementTransformer.transformRecursively($scope.form, fobuConfig);
+      if ($state.is('new')) {
+        $state.go('edit', { formId: $scope.form.id });
+      }
     });
   };
 
@@ -111,11 +113,11 @@ angular.module('fobu.edit', [
 
   function select(element) {
     if ($scope.selection) {
-      $scope.selection.classes.splice($scope.selection.classes.indexOf('selected'), 1);
+      $scope.selection.selected = false;
     }
 
     $scope.selection = element;
-    $scope.selection.classes.push('selected');
+    $scope.selection.selected = true;
   }
 })
 
@@ -150,6 +152,9 @@ angular.module('fobu.edit', [
 
       $scope.removeElement = function(index) {
         $scope.selection.elements.splice(index, 1);
+        if ($scope.selection.elements.length === 0) {
+          $scope.selection.elements = [{ text: '' }];
+        }
       };
 
       $scope.$watch('selection.type', function(type) {
